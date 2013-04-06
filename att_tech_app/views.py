@@ -21,14 +21,12 @@ def index_page(request):
         'index_pictures': index_pictures,
         'index_text_blocks': index_text_blocks,
     }
-    #last_news = New.objects.all().order_by('-date_added')[:5]
-    #return {'last_news': last_news,}
 
 
 @render_to('basic_page.html')
 def basic_page_view(request, location):
     article = BasicArticle.objects.get(location=location)
-    pictures_list = list(article.files_list.all()) * 3
+    pictures_list = list(article.files_list.all())
     files_list = organize_in_lists(pictures_list, 6)
     return {
         'article': BasicArticle.objects.get(location=location),
@@ -46,11 +44,12 @@ def page_with_docs_view(request, location):
 
 @render_to('employees_page.html')
 def employees_page(request):
-    discipline_types = map(lambda obj: obj.discipline_type, DisciplineType.objects.all())
+    discipline_types = map(lambda obj: obj.discipline_type, 
+                            DisciplineType.objects.all())
     employees_lists = []
     for d_type in discipline_types:
-        employees_lists.append(set([d.tutor for d in \
-            Discipline.objects.filter(discipline_type__discipline_type=d_type)]))
+        employees_lists.append(set([d.tutor for d in 
+        Discipline.objects.filter(discipline_type__discipline_type=d_type)]))
     return {
         'discipline_types': discipline_types,
         'employees_lists': employees_lists,
@@ -80,11 +79,7 @@ def contacts_page(request):
     contacts = Contacts.objects.all()[0].contacts
     return locals()
 
-"""
-@render_to('news_page.html')
-def  news_page(request):
-    news = New.objects.all()
-"""
+
 def paginate(cur_page, N):
     pages_list = []
     margin = 3
@@ -96,7 +91,8 @@ def paginate(cur_page, N):
         # first pages, gap and middle (or last) pages
         pages_list.extend(range(1, (margin + 1) + 1))
         pages_list.append(0)
-        pages_list.extend(range(cur_page-margin, min((cur_page + margin) + 1, N + 1)))
+        pages_list.extend(range(cur_page-margin, min((cur_page + margin) + 1,
+            N + 1)))
     else:
          # very first pages
         pages_list.extend(range(1, (cur_page + margin) + 1))
@@ -123,10 +119,12 @@ def news_page(request, page_type):
         cur_page = 1
     if page_type == 'stud_life':
         is_event = True
-        N = int(math.ceil(NewCounter.objects.get(id=0).events_number / float(news_per_page)))
+        N = int(math.ceil(NewCounter.objects.get(id=0).events_number / 
+            float(news_per_page)))
     else:
         is_event = False
-        N = int(math.ceil(NewCounter.objects.get(id=0).news_number / float(news_per_page)))
+        N = int(math.ceil(NewCounter.objects.get(id=0).news_number /
+            float(news_per_page)))
     if cur_page > N: # can have db error if cur_page, somehow, is too large
         cur_page = N
     obj_list = New.objects.filter(is_event=is_event)

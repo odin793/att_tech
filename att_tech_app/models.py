@@ -17,7 +17,8 @@ BASIC_ARTICLE_LOCATION_CHOICES = (
 class BasicArticle(models.Model):
     title = models.CharField(u'Заголовок', max_length=100)
     text = tinymce_models.HTMLField(u'Текст')
-    location = models.CharField(u'Расположение', max_length=100, choices = BASIC_ARTICLE_LOCATION_CHOICES)
+    location = models.CharField(u'Расположение', max_length=100,
+        choices = BASIC_ARTICLE_LOCATION_CHOICES)
     files_list = generic.GenericRelation('Picture')
           
     class Meta:
@@ -39,7 +40,8 @@ ARTICLE_WITH_DOCUMENTS_LOCATION_CHOICES = (
 class ArticleWithDocuments(models.Model):
     title = models.CharField(u'Заголовок', max_length=100)
     text = tinymce_models.HTMLField(u'Текст')
-    location = models.CharField(u'Расположение', max_length=100, choices = ARTICLE_WITH_DOCUMENTS_LOCATION_CHOICES)
+    location = models.CharField(u'Расположение', max_length=100,
+        choices = ARTICLE_WITH_DOCUMENTS_LOCATION_CHOICES)
     files_list = generic.GenericRelation('Document')
           
     class Meta:
@@ -55,7 +57,8 @@ class New(models.Model):
     short_text = tinymce_models.HTMLField(u'Краткое содержание')
     full_text = tinymce_models.HTMLField(u'Полный текст')
     pictures_list = generic.GenericRelation('Picture')
-    main_photo = models.URLField(u'Главное фото (300x200)', blank=True, null=True) # fixed 300 x 200 proportions
+    main_photo = models.URLField(u'Главное фото (300x200)',
+        blank=True, null=True) # fixed 300 x 200 proportions
     date_added = models.DateField(u'Дата добавления')
     is_event = models.BooleanField(u'Событие студ. жизни ?', default = False)
     
@@ -85,8 +88,10 @@ class Profession(models.Model):
 class Person(models.Model):
     full_name = models.CharField(u'ФИО', max_length=150)
     photo = models.URLField(u'Фото', blank=True, null=True) # fixed 1.5 ratio
-    position = models.CharField(u'Должность', max_length=250, blank=True, null=True)
-    contacts = models.CharField(u'Контактный телефон', max_length=50, blank=True, null=True)
+    position = models.CharField(u'Должность', max_length=250,
+        blank=True, null=True)
+    contacts = models.CharField(u'Контактный телефон', max_length=50,
+        blank=True, null=True)
     master_status = models.BooleanField(u'Управляющий ?', default = False)
     
     class Meta:
@@ -94,7 +99,8 @@ class Person(models.Model):
         verbose_name_plural = u'сотрудники'
     
     def __unicode__(self):
-        return u'%s, администрация: %s' % (self.full_name, str(self.master_status))
+        return u'%s, администрация: %s' % (self.full_name,
+                                        str(self.master_status))
 
 
 class Discipline(models.Model):
