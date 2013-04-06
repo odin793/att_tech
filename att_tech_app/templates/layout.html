@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %} {% endblock %}</title>
+		<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet" media="screen">
+		{% block extrahead %} {% endblock %}
+  </head>
+  <body>
+		<div class="layout_wrap">
+					<div class="header" style="position: relative;">
+						<ul class="nav nav-pills pull-right">
+							<li class="dropdown menu-0">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									О техникуме
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="{% url about_tech 'about_tech' %}">О техникуме</a></li>
+									<li><a href="{% url structure 'structure' %}">Структура</a></li>
+									<li><a href="{% url constituent_docs 'constituent_docs'%}">Учредительные документы</a></li>
+									<li><a href="{% url masters_page %}">Администрация</a></li>
+									<li><a href="{% url employees_page %}">Сотрудники</a></li>
+								</ul>
+							</li>
+							<li class="dropdown menu-1">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									Абитуриентам
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="{% url profs_and_specs %}">Специальности и профессии</a></li>
+									<li><a href="{% url tuition_by_correspondence 'tuition_by_correspondence' %}">Заочное отделение</a></li>
+									<li><a href="{% url courses 'courses' %}">Подготовительные курсы</a></li>
+									<li><a href="{% url acceptance_rules 'acceptance_rules' %}">Правила приема</a></li>
+									<li><a href="{% url docs_samples 'docs_samples' %}">Образцы документов</a></li>
+									<li><a href="{% url acceptance 'acceptance' %}">Зачисление</a></li>
+								</ul>
+							</li>
+
+							<li class="dropdown menu-2">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									Обучающимся
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="{% url schedule 'schedule' %}">Расписание</a></li>
+									<li><a href="{% url stud_life_page 'stud_life' %}">Студенческая жизнь</a></li>
+								</ul>
+							</li>
+
+							<li class="menu-3"><a href="{% url news_page 'news' %}">Новости</a></li>
+							<li class="menu-4"><a href="{% url contacts %}">Контакты</a></li>
+						</ul>
+						<a href="/">
+						<img src="{{STATIC_URL}}img/text_s.png" style="position: absolute; left: 195px; top: 38px" />
+						<img src="{{STATIC_URL}}img/logo.png" style="position: absolute; left: 25px; top: 25px"/>
+						</a>
+					</div>
+
+			<div class="layout">
+
+				<div class="main_wrap">
+					<div class="content">
+						<div class="content_wrap">
+							{% block content %} {% endblock %}
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+		<script>
+			var arr = ['/about_tech', 'matriculants', 'students', 'news', 'contacts'];
+			var url = window.location.toString();
+			var main_page = true;
+			$.each(arr, function(ind, el) {
+				if (url.match(el) !== null) {
+					$('li.menu-' + ind).addClass('active');
+					main_page = false
+				}
+			});
+			if (main_page) {
+				$('li.menu-0').addClass('active');
+			}
+		</script>
+		{% block added_scripts %} {% endblock %}
+  </body>
+</html>

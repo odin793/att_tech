@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+{% load att_tech_app_tags %}
+
+{% block title %} Сотрудники {% endblock %}
+
+{% block extrahead %}
+	
+{% endblock %}
+
+
+{% block content %}							
+
+	<div class="row-fluid" style="margin: 0 auto;">
+		<div class="span9" style="padding-right: 40px;">
+
+			<h2 style="margin: 0 0 20px 0;">Сотрудники техникума</h2>
+			<div class="row">
+				<div class="clearfix">&nbsp;</div>
+				<div class="clearfix">&nbsp;</div>
+			</div>
+
+			<div>
+				<ul class="nav nav-tabs" id="employeeTabs">
+					{% for d_type in discipline_types %}
+					{% if forloop.first %}
+						<li class="active">
+					{% else %}
+						<li>
+					{% endif %}
+					  <a href="#employee-{{ forloop.counter }}">{{ d_type }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+				<div class="tab-content">
+					{% for employee_list in employees_lists %}
+					{% if forloop.first %}
+						<div class="tab-pane active" id="employee-{{ forloop.counter }}">
+					{% else %}
+						<div class="tab-pane" id="employee-{{ forloop.counter }}">
+					{% endif %}
+						<table class="table table-striped employees_table">
+							{% for employee in employee_list %}
+			      		<tr>
+									{% comment %}<td><h4>{{ forloop.counter }}</h4></td>{% endcomment %}
+									{% comment %}<td><h4><img src="{{ employee.photo }}" style="width: 100px; height: 100px;"></h4></td>{% endcomment %}
+									<td><p class="employee_row" style="font-size: 18px">{{ employee.full_name }}</p></td>
+									<td>
+										<p class="employee_row">
+											{% for d in employee.discipline_set.all %}
+												{% if forloop.last %}
+													{{ d.name }}
+												{% else %}
+													{{ d.name }},&nbsp;
+												{% endif %}
+											{% endfor %}
+										</p>
+									</td>
+			  				</tr>
+							{% endfor %}
+						</table>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% news_block %}
+		
+	</div>
+{% endblock %}							
+
+
+{% block added_scripts %}
+<script>
+	$('#employeeTabs a').click(function (e) {
+  	e.preventDefault();
+  	$(this).tab('show');
+	});	
+</script>
+{% endblock %}

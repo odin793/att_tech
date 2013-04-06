@@ -1,0 +1,129 @@
+/* GENERAL */
+
+.layout {
+    margin: 0 auto;
+    width: 1200px;
+    height: auto;
+    min-height: 500px;
+    border: 1px solid #f0f0f0;
+    -webkit-border-bottom-right-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px; 
+}
+
+.header {
+    background: url('bg_texture.png') 0 0 repeat;
+    padding: 30px 20px 20px 20px;
+    webkit-border-top-left-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin: 0 auto;
+    width: 1160px;
+    height: 125px;
+    border: 1px solid #f0f0f0;
+    border-bottom: 0;
+}
+
+.well {
+    /*background: url('grey.png') 0 0 repeat;*/
+}
+
+.main_wrap {
+    padding: 20px;
+}
+
+.logo {
+    line-height: 40px;
+    margin-bottom: 45px;
+    margin-top: 3px;
+}
+
+.nav-pills {
+    margin-right: 35px;
+}
+
+div #indexCarousel {
+    width: 830px;
+    height: 477px;
+    margin: 0 auto;
+}
+
+.content_wrap {
+    padding: 30px 20px 20px 20px;
+}
+
+.outer_cont {
+    position: relative;
+}
+
+.inner_cont {
+    position: absolute;
+    top: 50%;
+    height: 160px;
+    margin-top: -80px;
+}
+
+.index_news .row-fluid {
+    min-height: 200px;
+}
+
+.index_news .row-fluid .span4 {
+    padding: 20px;
+    text-align: center;
+}
+
+.index_news p {
+    text-align: justify;
+}
+
+.index_news a.btn {
+    color: white;
+}
+
+.employees_table td, .masters_table td {
+    vertical-align: middle;
+}
+
+.employee_row {
+    font-size: 18px;
+    padding: 10px 0;
+    margin: 10px 0;
+}
+
+.masters_table td {
+   padding: 20px 0;
+}
+
+.masters_table td.master_info {
+    text-align: center;
+    padding-left: 30px;
+    width: 460px;
+}
+
+.masters_table .master_contacts {
+    /*text-align: left;*/
+}
+
+.news_lent .news_lent_new {
+    margin: 25px 0;
+}
+
+.news_lent .news_lent_new p {
+    text-align: justify;
+}
+
+.gap_link {
+    text-decoration: none;
+    color: #333333;
+}
+
+.gap_link:hover {
+    text-decoration: none;
+    cursor: default;
+}

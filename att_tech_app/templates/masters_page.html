@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% load att_tech_app_tags %}
+
+{% block title %} Администрация техникума {% endblock %}
+
+{% block extrahead %}
+	
+{% endblock %}
+
+
+{% block content %}							
+
+	<div class="row-fluid" style="margin: 0 auto;">
+		<div class="span9" style="padding-right: 40px;">
+
+			<h2 style="margin: 0 0 20px 0;">Администрация техникума</h2>
+			<div class="row">
+				<div class="clearfix">&nbsp;</div>
+				<div class="clearfix">&nbsp;</div>				
+			</div>
+
+			<div>
+				<table class="table masters_table">
+					{% for master in masters_list %}
+	      		<tr>
+							<td><h4><img src="{{ master.photo }}" class="img-polaroid" style="width: 300px; height: 200px;"></h4></td>
+							<td class="master_info">
+								<div>
+									<h3 class="lead">{{ master.full_name }}</h3>
+									<div class="row">	
+										<div class="clearfix">&nbsp;</div>
+									</div>
+									<div class="alert alert-info" style="padding: 8px 14px;"><h5>{{ master.position }}</h5></div>
+									<div class="row">
+										<div class="clearfix">&nbsp;</div>
+									</div>
+									<div class="master_contacts">
+								  	{%comment %}<span class="badge badge-info">{{ master.contacts }}</span>{% endcomment %}
+								<span class="btn disabled" style="opacity: 1;">Тел: {{ master.contacts }}</span>
+									</div>
+								</div>
+							</td>
+	  				</tr>
+					{% endfor %}
+				</table>
+			</div>
+		
+		</div>
+		{% news_block %}
+		
+	</div>
+{% endblock %}							
+
+
+{% block added_scripts %}
+{% endblock %}

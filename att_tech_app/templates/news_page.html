@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+{% load att_tech_app_tags %}
+
+{% block title %}
+	{% if is_event %}
+		Студенческая жизнь
+	{% else %}
+		Новости
+	{% endif %}
+{% endblock %}
+
+{% block extrahead %}
+	
+{% endblock %}
+
+
+{% block content %}							
+
+	<div class="row-fluid" style="margin: 0 auto;">
+		<div class="span9" style="padding-right: 40px;">
+
+			{% if is_event %}
+					<h2 style="margin: 0 0 20px 0;">Студенческая жизнь</h2>
+			{% else %}
+					<h2 style="margin: 0 0 20px 0;">Новости</h2>
+			{% endif %}
+			<div class="row">
+				<div class="clearfix">&nbsp;</div>
+			</div>
+
+			<div>
+				<div>
+					{% for new in obj_list %}
+						<div class="row-fluid">
+							<div class="alert alert-info text-center" style="padding: 8px 14px;">
+								<a href="{{ new.id }}"><h4 style="margin: 8px 0">{{ new.title }}</h4></a>
+							</div>
+							<p>{{ new.short_text|safe }}</p>
+							<p class="badge badge-info" style="margin-top: 10px;"><i>{{ new.date_added }}</i></p>
+							<hr>
+						</div>
+					{% empty %}
+							<div class="alert alert-info text-center" style="padding: 8px 14px;">
+								<h4 style="margin: 8px 0">Нет новостей</h4>
+    					</div>
+					{% endfor %}
+						
+					<div class="row-fluid">
+						<div style="text-align: center">
+							<div class="btn-toolbar">						
+								{% for link in links_list %}
+									<div class="btn-group">
+										{% if link != 0 and link != cur_page %}
+											<a class="btn btn-small" href="?page={{ link }}">{{ link }}</a>
+										{% elif link == cur_page %}
+											<button class="btn disabled btn-inverse btn-small">{{ link }}</button>
+										{% else %}
+											<button class="btn btn-link gap_link btn-small" type="button">...</button>
+										{% endif %}
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+
+					{% comment %}
+					<div class="pagination pagination-centered pagination-small">
+				  	<ul>
+							{% for link in links_list %}
+								{% if link != 0 and link != cur_page %}
+									<li><a href="?page={{ link }}">{{ link }}</a></li>
+								{% elif link == cur_page %}
+									<li><span class="btn current_page_link">{{ link }}</span></li>
+								{% else %}
+									<li><span>...</span></li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</div>
+					{% endcomment %}
+				
+				</div>
+			
+			</div>
+		</div>
+		{% news_block %}
+				
+	</div>
+{% endblock %}							
+
+
+{% block added_scripts %}
+
+{% endblock %}

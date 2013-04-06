@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% load att_tech_app_tags %}
+
+{% block title %} Контакты {% endblock %}
+
+{% block extrahead %}
+	<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+{% endblock %}
+
+
+{% block content %}							
+		<div class="row-fluid" style="margin: 0 auto;">
+		<div class="span9" style="padding-right: 40px;">
+
+			<h2 style="margin: 0 0 20px 0;">Контакты</h2>
+			<div class="row">
+				<div class="clearfix">&nbsp;</div>
+			</div>
+			
+			<div>
+				<div class="lead">
+				{{ contacts|safe }}
+				</div>
+				<div>
+					<div id="map" style="width: 750px; height: 500px; margin: 0 auto;"></div>
+				</div>
+			</div>
+			
+		</div>
+		
+		{% news_block %}
+		</div>	
+
+{% endblock %}
+
+{% block added_scripts %}
+<script type="text/javascript">
+	ymaps.ready(init);
+	var myMap, myPlacemark;
+
+	function init() { 
+  	myMap = new ymaps.Map ("map", {
+			center: [54.620736, 39.738242], 
+			zoom: 15
+		});
+		myPlacemark = new ymaps.Placemark([54.620736, 39.738242], {
+	  	iconContent: 'Полевая, 38',
+			balloonContentHeader: 'Автотранспортный техникум им. С. А. Живаго',
+		}, {
+			preset: 'twirl#blueStretchyIcon' // иконка растягивается под контент
+		});
+		myMap.controls
+			.add('zoomControl')
+			.add('typeSelector')
+			.add('smallZoomControl', { right: 5, top: 75 })
+			.add('mapTools');
+				
+		myMap.geoObjects.add(myPlacemark);
+	}
+</script>
+{% endblock %}

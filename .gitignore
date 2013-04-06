@@ -1,0 +1,6 @@
+*.pyc
+static/tiny_mce
+att_tech.db
+venv/
+att_tech/settings_local.py
+.DS_Store

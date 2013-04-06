@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+{% load att_tech_app_tags %}
+
+{% block title %} Специальности и профессии {% endblock %}
+
+{% block extrahead %}
+	
+{% endblock %}
+
+
+{% block content %}							
+
+	<div class="row-fluid" style="margin: 0 auto;">
+		<div class="span9" style="padding-right: 40px;">
+
+			<h2 style="margin: 0 0 20px 0;">Специальности и профессии</h2>
+			<div class="row">
+				<div class="clearfix">&nbsp;</div>
+				<div class="clearfix">&nbsp;</div>
+			</div>
+
+			<div>
+				<ul class="nav nav-tabs" id="myTabs">
+				{% for p_type in page_types %}
+					{% if forloop.first %}
+						<li class="active">
+					{% else %}
+						<li>
+					{% endif %}
+					  <a href="#page_type-{{ forloop.counter }}">{{ p_type }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+				<div class="tab-content">
+					{% for items_list in page_items_list %}
+					{% if forloop.first %}
+						<div class="tab-pane active" id="page_type-{{ forloop.counter }}">
+					{% else %}
+						<div class="tab-pane" id="page_type-{{ forloop.counter }}">
+					{% endif %}
+						{% for item in items_list %}
+							<div class="row-fluid">
+								<div class="alert alert-info text-center" style="padding: 8px 14px;">
+									<h4 style="margin: 8px 0">{{ item.name }}</h4>
+									<p>{{ item.meta_info }}</p>
+								</div>
+								<p>{{ item.text|safe }}</p>
+								<hr>
+							</div>
+						{% endfor %}	
+						</div>
+				{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% news_block %}
+		
+	</div>
+{% endblock %}							
+
+
+{% block added_scripts %}
+<script>
+	$('#myTabs a').click(function (e) {
+  	e.preventDefault();
+  	$(this).tab('show');
+	});	
+</script>
+{% endblock %}
