@@ -987,10 +987,6 @@
   <object pk="98" model="att_tech_app.picture">
     <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
   </object>
-  <object pk="0" model="att_tech_app.newcounter">
-    <field type="PositiveIntegerField" name="news_number">5</field>
-    <field type="PositiveIntegerField" name="events_number">5</field>
-  </object>
   <object pk="1" model="att_tech_app.indexpicture">
     <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/bootstrap-mdo-sfmoma-01.jpg</field>
     <field type="CharField" name="name">Название фото 1</field>
