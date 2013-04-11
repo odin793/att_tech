@@ -138,12 +138,16 @@ class Contacts(models.Model):
         return u'Контакты'
 
 
+
 class Document(models.Model):
     name = models.CharField(u'Название', max_length=250)
     url = models.URLField(u'ссылка')
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+    
+    def natural_key(self):
+        return (self.name, self.url)
     
     class Meta:
         verbose_name = u'Документ'
@@ -156,6 +160,10 @@ class Document(models.Model):
 class Picture(Document):
     thumbnail_url = models.URLField(u'ссылка на превью', blank=True, null=True)
     
+    def natural_key(self):
+        return (self.name, self.url, self.thumbnail_url)
+
+
     class Meta:
         verbose_name = u'Фото'
         verbose_name_plural = u'фото'
