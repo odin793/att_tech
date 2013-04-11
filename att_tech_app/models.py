@@ -157,8 +157,13 @@ class Document(models.Model):
         return self.name
 
 
-class Picture(Document):
+class Picture(models.Model):
+    name = models.CharField(u'Название', max_length=250)
+    url = models.URLField(u'ссылка')
     thumbnail_url = models.URLField(u'ссылка на превью', blank=True, null=True)
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
     
     def natural_key(self):
         return (self.name, self.url, self.thumbnail_url)
