@@ -1,0 +1,1027 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+  <object pk="1" model="att_tech_app.basicarticle">
+    <field type="CharField" name="title">О техникуме</field>
+    <field type="TextField" name="text">&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&lt;img style="border: 0; margin: 0 20px 20px 0; vertical-align: middle;" src="https://dl.dropbox.com/u/930819/att_tech/old_building.jpg" alt="" width="700" height="450" /&gt;&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;In that form, the &amp;ldquo;Poll&amp;rdquo; field is a select box containing every poll in the database. Django knows that a&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.ForeignKey" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.ForeignKey"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;ForeignKey&lt;/tt&gt;&lt;/a&gt;&amp;nbsp;should be represented in the admin as a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;select&amp;gt;&lt;/tt&gt;&amp;nbsp;box. In our case, only one poll exists at this point.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Also note the &amp;ldquo;Add Another&amp;rdquo; link next to &amp;ldquo;Poll.&amp;rdquo; Every object with a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;ForeignKey&lt;/tt&gt;&amp;nbsp;relationship to another get&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;s this for free. When you click &amp;ldquo;Add Another,&amp;rdquo; you&amp;rsquo;ll get a popup window with the &amp;ldquo;Add poll&amp;rdquo; form. If you add a poll in that window and click &amp;ldquo;Save,&amp;rdquo; Django will save the poll to the database and dynamically add it as the selected choice on the &amp;ldquo;Add&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;choice&amp;rdquo; form you&amp;rsquo;re looking at.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;But, really, this is an inefficient way of adding&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;Choice&lt;/tt&gt;&amp;nbsp;objects to the system. It&amp;rsquo;d be better if you could add a bunch of Choices directly when you create the&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;Poll&lt;/tt&gt;&amp;nbsp;object. Let&amp;rsquo;s make that happen.&lt;/p&gt;
+&lt;ol class="arabic" style="padding-left: 30px; margin-left: 0px; margin-right: 0px;"&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;By default,&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;, and you can omit it from any filters where it isn&amp;rsquo;t required.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;Be careful when deciding if your filter really does leave safe strings as safe. If you&amp;rsquo;re&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;removing&lt;/em&gt;&amp;nbsp;characters, you might inadvertently leave unbalanced HTML tags or entities in the result. For example, removing a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;from the input might turn&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&amp;gt;&lt;/tt&gt;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&lt;/tt&gt;, which would need to be escaped on output to avoid causing problems. Similarly, removing a semicolon (&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;;&lt;/tt&gt;) can turn&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp;&lt;/tt&gt;&amp;nbsp;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp&lt;/tt&gt;, which is no longer a valid entity and thus needs further escaping. Most cases won&amp;rsquo;t be nearly this tricky, but keep an eye out for any problems like that when reviewing your code.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;Marking a filter&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will coerce the filter&amp;rsquo;s return value to a string. If your filter should return a boolean or other non-string value, marking it&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will probably have unintended consequences (such as converting a boolean False to the string &amp;lsquo;False&amp;rsquo;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p class="first" style="margin: 0.6em 0px 0.8em;"&gt;Alternatively, your filter code can manually take care of any necessary escaping. This is necessary when you&amp;rsquo;re introducing new HTML markup into the result. You want to mark the output as safe from further escaping so that your HTML markup isn&amp;rsquo;t escaped further, so you&amp;rsquo;ll need to handle the input yourself.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;To mark the output as a safe string, use&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.utils.safestring.mark_safe" href="https://docs.djangoproject.com/en/dev/ref/utils/#django.utils.safestring.mark_safe"&gt;&lt;tt class="xref py py-func docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;django.utils.safestring.mark_safe()&lt;/tt&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div id="dc_vk_code" style="display: none;"&gt;&amp;nbsp;&lt;/div&gt;</field>
+    <field type="CharField" name="location">about_tech</field>
+  </object>
+  <object pk="2" model="att_tech_app.basicarticle">
+    <field type="CharField" name="title">Заочное отделение</field>
+    <field type="TextField" name="text">&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;In that form, the &amp;ldquo;Poll&amp;rdquo; field is a select box containing every poll in the database. Django knows that a&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.ForeignKey" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.ForeignKey"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span class="pre" style="margin-left: 0px; margin-right: 0px;"&gt;ForeignKey&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&amp;nbsp;should be represented in the admin as a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;select&amp;gt;&lt;/tt&gt;&amp;nbsp;box. In our case, only one poll exists at this point.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Also note the &amp;ldquo;Add Another&amp;rdquo; link next to &amp;ldquo;Poll.&amp;rdquo; Every object with a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;ForeignKey&lt;/tt&gt;&amp;nbsp;relationship to another gets this for free. When you click &amp;ldquo;Add Another,&amp;rdquo; you&amp;rsquo;ll get a popup window with the &amp;ldquo;Add poll&amp;rdquo; form. If you add a poll in that window and click &amp;ldquo;Save,&amp;rdquo; Django will save the poll to the database and dynamically add it as the selected choice on the &amp;ldquo;Add choice&amp;rdquo; form you&amp;rsquo;re looking at.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;But, really, this is an inefficient way of adding&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;Choice&lt;/tt&gt;&amp;nbsp;objects to the system. It&amp;rsquo;d be better if you could add a bunch of Choices directly when you create the&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;Poll&lt;/tt&gt;&amp;nbsp;object. Let&amp;rsquo;s make that happen.&lt;/p&gt;
+&lt;ol class="arabic" style="padding-left: 30px; margin-left: 0px; margin-right: 0px;"&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;By default,&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;, and you can omit it from any filters where it isn&amp;rsquo;t required.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;Be careful when deciding if your filter really does leave safe strings as safe. If you&amp;rsquo;re&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;removing&lt;/em&gt;&amp;nbsp;characters, you might inadvertently leave unbalanced HTML tags or entities in the result. For example, removing a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;from the input might turn&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&amp;gt;&lt;/tt&gt;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&lt;/tt&gt;, which would need to be escaped on output to avoid causing problems. Similarly, removing a semicolon (&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;;&lt;/tt&gt;) can turn&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp;&lt;/tt&gt;&amp;nbsp;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp&lt;/tt&gt;, which is no longer a valid entity and thus needs further escaping. Most cases won&amp;rsquo;t be nearly this tricky, but keep an eye out for any problems like that when reviewing your code.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;Marking a filter&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will coerce the filter&amp;rsquo;s return value to a string. If your filter should return a boolean or other non-string value, marking it&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will probably have unintended consequences (such as converting a boolean False to the string &amp;lsquo;False&amp;rsquo;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p class="first" style="margin: 0.6em 0px 0.8em;"&gt;Alternatively, your filter code can manually take care of any necessary escaping. This is necessary when you&amp;rsquo;re introducing new HTML markup into the result. You want to mark the output as safe from further escaping so that your HTML markup isn&amp;rsquo;t escaped further, so you&amp;rsquo;ll need to handle the input yourself.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;To mark the output as a safe string, use&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.utils.safestring.mark_safe" href="https://docs.djangoproject.com/en/dev/ref/utils/#django.utils.safestring.mark_safe"&gt;&lt;tt class="xref py py-func docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span class="pre" style="margin-left: 0px; margin-right: 0px;"&gt;django.utils.safestring.mark_safe()&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div id="dc_vk_code" style="display: none;"&gt;&amp;nbsp;&lt;/div&gt;</field>
+    <field type="CharField" name="location">tuition_by_correspondence</field>
+  </object>
+  <object pk="3" model="att_tech_app.basicarticle">
+    <field type="CharField" name="title">Подготовительные курсы</field>
+    <field type="TextField" name="text">&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;In that form, the &amp;ldquo;Poll&amp;rdquo; field is a select box containing every poll in the database. Django knows that a&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.ForeignKey" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.ForeignKey"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span class="pre" style="margin-left: 0px; margin-right: 0px;"&gt;ForeignKey&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&amp;nbsp;should be represented in the admin as a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;select&amp;gt;&lt;/tt&gt;&amp;nbsp;box. In our case, only one poll exists at this point.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Also note the &amp;ldquo;Add Another&amp;rdquo; link next to &amp;ldquo;Poll.&amp;rdquo; Every object with a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;ForeignKey&lt;/tt&gt;&amp;nbsp;relationship to another gets this for free. When you click &amp;ldquo;Add Another,&amp;rdquo; you&amp;rsquo;ll get a popup window with the &amp;ldquo;Add poll&amp;rdquo; form. If you add a poll in that window and click &amp;ldquo;Save,&amp;rdquo; Django will save the poll to the database and dynamically add it as the selected choice on the &amp;ldquo;Add choice&amp;rdquo; form you&amp;rsquo;re looking at.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;But, really, this is an inefficient way of adding&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;Choice&lt;/tt&gt;&amp;nbsp;objects to the system. It&amp;rsquo;d be better if you could add a bunch of Choices directly when you create the&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;Poll&lt;/tt&gt;&amp;nbsp;object. Let&amp;rsquo;s make that happen.&lt;/p&gt;
+&lt;ol class="arabic" style="padding-left: 30px; margin-left: 0px; margin-right: 0px;"&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;By default,&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;, and you can omit it from any filters where it isn&amp;rsquo;t required.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Be careful when deciding if your filter really does leave safe strings as safe. If you&amp;rsquo;re&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;removing&lt;/em&gt;&amp;nbsp;characters, you might inadvertently leave unbalanced HTML tags or entities in the result. For example, removing a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;from the input might turn&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&amp;gt;&lt;/tt&gt;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&lt;/tt&gt;, which would need to be escaped on output to avoid causing problems. Similarly, removing a semicolon (&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;;&lt;/tt&gt;) can turn&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp;&lt;/tt&gt;&amp;nbsp;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp&lt;/tt&gt;, which is no longer a valid entity and thus needs further escaping. Most cases won&amp;rsquo;t be nearly this tricky, but keep an eye out for any problems like that when reviewing your code.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;Marking a filter&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will coerce the filter&amp;rsquo;s return value to a string. If your filter should return a boolean or other non-string value, marking it&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will probably have unintended consequences (such as converting a boolean False to the string &amp;lsquo;False&amp;rsquo;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p class="first" style="margin: 0.6em 0px 0.8em;"&gt;Alternatively, your filter code can manually take care of any necessary escaping. This is necessary when you&amp;rsquo;re introducing new HTML markup into the result. You want to mark the output as safe from further escaping so that your HTML markup isn&amp;rsquo;t escaped further, so you&amp;rsquo;ll need to handle the input yourself.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;To mark the output as a safe string, use&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.utils.safestring.mark_safe" href="https://docs.djangoproject.com/en/dev/ref/utils/#django.utils.safestring.mark_safe"&gt;&lt;tt class="xref py py-func docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span class="pre" style="margin-left: 0px; margin-right: 0px;"&gt;django.utils.safestring.mark_safe()&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div id="dc_vk_code" style="display: none;"&gt;&amp;nbsp;&lt;/div&gt;</field>
+    <field type="CharField" name="location">courses</field>
+  </object>
+  <object pk="4" model="att_tech_app.basicarticle">
+    <field type="CharField" name="title">Правила приема</field>
+    <field type="TextField" name="text">&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;In that form, the &amp;ldquo;Poll&amp;rdquo; field is a select box containing every poll in the database. Django knows that a&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.ForeignKey" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.ForeignKey"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span class="pre" style="margin-left: 0px; margin-right: 0px;"&gt;ForeignKey&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&amp;nbsp;should be represented in the admin as a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;select&amp;gt;&lt;/tt&gt;&amp;nbsp;box. In our case, only one poll exists at this point.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Also note the &amp;ldquo;Add Another&amp;rdquo; link next to &amp;ldquo;Poll.&amp;rdquo; Every object with a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;ForeignKey&lt;/tt&gt;&amp;nbsp;relationship to another gets this for free. When you click &amp;ldquo;Add Another,&amp;rdquo; you&amp;rsquo;ll get a popup window with the &amp;ldquo;Add poll&amp;rdquo; form. If you add a poll in that window and click &amp;ldquo;Save,&amp;rdquo; Django will save the poll to the database and dynamically add it as the selected choice on the &amp;ldquo;Add choice&amp;rdquo; form you&amp;rsquo;re looking at.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;But, really, this is an inefficient way of adding&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;Choice&lt;/tt&gt;&amp;nbsp;objects to the system. It&amp;rsquo;d be better if you could add a bunch of Choices directly when you create the&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;Poll&lt;/tt&gt;&amp;nbsp;object. Let&amp;rsquo;s make that happen.&lt;/p&gt;
+&lt;ol class="arabic" style="padding-left: 30px; margin-left: 0px; margin-right: 0px;"&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;By default,&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;, and you can omit it from any filters where it isn&amp;rsquo;t required.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;Be careful when deciding if your filter really does leave safe strings as safe. If you&amp;rsquo;re&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;removing&lt;/em&gt;&amp;nbsp;characters, you might inadvertently leave unbalanced HTML tags or entities in the result. For example, removing a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;from the input might turn&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&amp;gt;&lt;/tt&gt;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&lt;/tt&gt;, which would need to be escaped on output to avoid causing problems. Similarly, removing a semicolon (&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;;&lt;/tt&gt;) can turn&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp;&lt;/tt&gt;&amp;nbsp;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp&lt;/tt&gt;, which is no longer a valid entity and thus needs further escaping. Most cases won&amp;rsquo;t be nearly this tricky, but keep an eye out for any problems like that when reviewing your code.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;Marking a filter&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will coerce the filter&amp;rsquo;s return value to a string. If your filter should return a boolean or other non-string value, marking it&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will probably have unintended consequences (such as converting a boolean False to the string &amp;lsquo;False&amp;rsquo;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p class="first" style="margin: 0.6em 0px 0.8em;"&gt;Alternatively, your filter code can manually take care of any necessary escaping. This is necessary when you&amp;rsquo;re introducing new HTML markup into the result. You want to mark the output as safe from further escaping so that your HTML markup isn&amp;rsquo;t escaped further, so you&amp;rsquo;ll need to handle the input yourself.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em;"&gt;To mark the output as a safe string, use&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.utils.safestring.mark_safe" href="https://docs.djangoproject.com/en/dev/ref/utils/#django.utils.safestring.mark_safe"&gt;&lt;tt class="xref py py-func docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span class="pre" style="margin-left: 0px; margin-right: 0px;"&gt;django.utils.safestring.mark_safe()&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field in your model should be an instance of the appropriate&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px; text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.Field" href="https://docs.djangoproject.com/en/dev/howto/custom-model-fields/#django.db.models.Field"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Field&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;class. Django uses the field class types to determine a few things:&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field takes a certain set of field-specific arguments (documented in the&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#model-field-types"&gt;model field reference&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;). For example,&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;CharField&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;(and its subclasses) require a&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField.max_length" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField.max_length"&gt;&lt;tt class="xref py py-attr docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;max_length&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;argument which specifies the size of the&amp;nbsp;&lt;/span&gt;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;VARCHAR&lt;/tt&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;database field used to store the data.&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field in your model should be an instance of the appropriate&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px; text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.Field" href="https://docs.djangoproject.com/en/dev/howto/custom-model-fields/#django.db.models.Field"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Field&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;class. Django uses the field class types to determine a few things:&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field takes a certain set of field-specific arguments (documented in the&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#model-field-types"&gt;model field reference&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;). For example,&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;CharField&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;(and its subclasses) require a&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField.max_length" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField.max_length"&gt;&lt;tt class="xref py py-attr docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;max_length&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;argument which specifies the size of the&amp;nbsp;&lt;/span&gt;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;VARCHAR&lt;/tt&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;database field used to store the data.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field in your model should be an instance of the appropriate&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px; text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.Field" href="https://docs.djangoproject.com/en/dev/howto/custom-model-fields/#django.db.models.Field"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Field&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;class. Django uses the field class types to determine a few things:&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field takes a certain set of field-specific arguments (documented in the&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#model-field-types"&gt;model field reference&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;). For example,&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;CharField&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;(and its subclasses) require a&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField.max_length" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField.max_length"&gt;&lt;tt class="xref py py-attr docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;max_length&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;argument which specifies the size of the&amp;nbsp;&lt;/span&gt;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;VARCHAR&lt;/tt&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;database field used to store the data.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field in your model should be an instance of the appropriate&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px; text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.Field" href="https://docs.djangoproject.com/en/dev/howto/custom-model-fields/#django.db.models.Field"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Field&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;class. Django uses the field class types to determine a few things:&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field takes a certain set of field-specific arguments (documented in the&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#model-field-types"&gt;model field reference&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;). For example,&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;CharField&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;(and its subclasses) require a&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField.max_length" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField.max_length"&gt;&lt;tt class="xref py py-attr docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;max_length&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;argument which specifies the size of the&amp;nbsp;&lt;/span&gt;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;VARCHAR&lt;/tt&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;database field used to store the data.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field in your model should be an instance of the appropriate&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px; text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.Field" href="https://docs.djangoproject.com/en/dev/howto/custom-model-fields/#django.db.models.Field"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Field&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;class. Django uses the field class types to determine a few things:&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field takes a certain set of field-specific arguments (documented in the&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#model-field-types"&gt;model field reference&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;). For example,&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;CharField&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;(and its subclasses) require a&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField.max_length" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField.max_length"&gt;&lt;tt class="xref py py-attr docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;max_length&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;argument which specifies the size of the&amp;nbsp;&lt;/span&gt;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;VARCHAR&lt;/tt&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;database field used to store the data.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field in your model should be an instance of the appropriate&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px; text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.Field" href="https://docs.djangoproject.com/en/dev/howto/custom-model-fields/#django.db.models.Field"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Field&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;class. Django uses the field class types to determine a few things:&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;Each field takes a certain set of field-specific arguments (documented in the&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#model-field-types"&gt;model field reference&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;). For example,&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField"&gt;&lt;tt class="xref py py-class docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;CharField&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;(and its subclasses) require a&amp;nbsp;&lt;/span&gt;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.db.models.CharField.max_length" href="https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.CharField.max_length"&gt;&lt;tt class="xref py py-attr docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;max_length&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;argument which specifies the size of the&amp;nbsp;&lt;/span&gt;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;VARCHAR&lt;/tt&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;&amp;nbsp;database field used to store the data.&lt;/span&gt;&lt;/p&gt;
+&lt;div id="dc_vk_code" style="display: none;"&gt;&amp;nbsp;&lt;/div&gt;</field>
+    <field type="CharField" name="location">acceptance_rules</field>
+  </object>
+  <object pk="1" model="att_tech_app.articlewithdocuments">
+    <field type="CharField" name="title">Структура</field>
+    <field type="TextField" name="text">&lt;ol class="arabic" style="padding-left: 30px; margin-left: 0px; margin-right: 0px; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;When this filter is used in a template where auto-escaping is enabled, Django will escape the output whenever the input is not already marked as &amp;ldquo;safe&amp;rdquo;.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;By default,&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;, and you can omit it from any filters where it isn&amp;rsquo;t required.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Be careful when deciding if your filter really does leave safe strings as safe. If you&amp;rsquo;re&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;removing&lt;/em&gt;&amp;nbsp;characters, you might inadvertently leave unbalanced HTML tags or entities in the result. For example, removing a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;from the input might turn&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&amp;gt;&lt;/tt&gt;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&lt;/tt&gt;, which would need to be escaped on output to avoid causing problems. Similarly, removing a semicolon (&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;;&lt;/tt&gt;) can turn&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp;&lt;/tt&gt;&amp;nbsp;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp&lt;/tt&gt;, which is no longer a valid entity and thus needs further escaping. Most cases won&amp;rsquo;t be nearly this tricky, but keep an eye out for any problems like that when reviewing your code.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Marking a filter&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will coerce the filter&amp;rsquo;s return value to a string. If your filter should return a boolean or other non-string value, marking it&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will probably have unintended consequences (such as converting a boolean False to the string &amp;lsquo;False&amp;rsquo;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p class="first" style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Alternatively, your filter code can manually take care of any necessary escaping. This is necessary when you&amp;rsquo;re introducing new HTML markup into the result. You want to mark the output as safe from further escaping so that your HTML markup isn&amp;rsquo;t escaped further, so you&amp;rsquo;ll need to handle the input yourself.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;To mark the output as a safe string, use&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.utils.safestring.mark_safe" href="https://docs.djangoproject.com/en/dev/ref/utils/#django.utils.safestring.mark_safe"&gt;&lt;tt class="xref py py-func docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span class="pre" style="margin-left: 0px; margin-right: 0px;"&gt;django.utils.safestring.mark_safe()&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Be careful, though. You need to do more than just mark the output as safe. You need to ensure it really&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;is&lt;/em&gt;&amp;nbsp;safe, and what you do depends on whether auto-escaping is in effect. The idea is to write filters than can operate in templates where auto-escaping is either on or off in order to make things easier for your template authors.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;In order for your filter to know the current auto-escaping state, set the&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;needs_autoescape&lt;/tt&gt;&amp;nbsp;flag to&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;True&lt;/tt&gt;&amp;nbsp;when you register your filter function. (If you don&amp;rsquo;t specify this flag, it defaults to&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;). This flag tells Django that your filter function wants to be passed an extra keyword argument, called&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;autoescape&lt;/tt&gt;, that is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;True&lt;/tt&gt;&amp;nbsp;if auto-escaping is in effect and&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;&amp;nbsp;otherwise.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;For example, let&amp;rsquo;s write a filter that emphasizes the first character of a string:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</field>
+    <field type="CharField" name="location">structure</field>
+  </object>
+  <object pk="2" model="att_tech_app.articlewithdocuments">
+    <field type="CharField" name="title">Расписание</field>
+    <field type="TextField" name="text">&lt;ol class="arabic" style="padding-left: 30px; margin-left: 0px; margin-right: 0px; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;When this filter is used in a template where auto-escaping is enabled, Django will escape the output whenever the input is not already marked as &amp;ldquo;safe&amp;rdquo;.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;By default,&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;, and you can omit it from any filters where it isn&amp;rsquo;t required.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Be careful when deciding if your filter really does leave safe strings as safe. If you&amp;rsquo;re&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;removing&lt;/em&gt;&amp;nbsp;characters, you might inadvertently leave unbalanced HTML tags or entities in the result. For example, removing a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;from the input might turn&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&amp;gt;&lt;/tt&gt;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&lt;/tt&gt;, which would need to be escaped on output to avoid causing problems. Similarly, removing a semicolon (&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;;&lt;/tt&gt;) can turn&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp;&lt;/tt&gt;&amp;nbsp;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp&lt;/tt&gt;, which is no longer a valid entity and thus needs further escaping. Most cases won&amp;rsquo;t be nearly this tricky, but keep an eye out for any problems like that when reviewing your code.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Marking a filter&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will coerce the filter&amp;rsquo;s return value to a string. If your filter should return a boolean or other non-string value, marking it&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will probably have unintended consequences (such as converting a boolean False to the string &amp;lsquo;False&amp;rsquo;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p class="first" style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Alternatively, your filter code can manually take care of any necessary escaping. This is necessary when you&amp;rsquo;re introducing new HTML markup into the result. You want to mark the output as safe from further escaping so that your HTML markup isn&amp;rsquo;t escaped further, so you&amp;rsquo;ll need to handle the input yourself.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;To mark the output as a safe string, use&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.utils.safestring.mark_safe" href="https://docs.djangoproject.com/en/dev/ref/utils/#django.utils.safestring.mark_safe"&gt;&lt;tt class="xref py py-func docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span class="pre" style="margin-left: 0px; margin-right: 0px;"&gt;django.utils.safestring.mark_safe()&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Be careful, though. You need to do more than just mark the output as safe. You need to ensure it really&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;is&lt;/em&gt;&amp;nbsp;safe, and what you do depends on whether auto-escaping is in effect. The idea is to write filters than can operate in templates where auto-escaping is either on or off in order to make things easier for your template authors.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;In order for your filter to know the current auto-escaping state, set the&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;needs_autoescape&lt;/tt&gt;&amp;nbsp;flag to&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;True&lt;/tt&gt;&amp;nbsp;when you register your filter function. (If you don&amp;rsquo;t specify this flag, it defaults to&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;). This flag tells Django that your filter function wants to be passed an extra keyword argument, called&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;autoescape&lt;/tt&gt;, that is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;True&lt;/tt&gt;&amp;nbsp;if auto-escaping is in effect and&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;&amp;nbsp;otherwise.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;For example, let&amp;rsquo;s write a filter that emphasizes the first character of a string:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</field>
+    <field type="CharField" name="location">schedule</field>
+  </object>
+  <object pk="3" model="att_tech_app.articlewithdocuments">
+    <field type="CharField" name="title">Учредительные документы</field>
+    <field type="TextField" name="text">&lt;ol class="arabic" style="padding-left: 30px; margin-left: 0px; margin-right: 0px; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;When this filter is used in a template where auto-escaping is enabled, Django will escape the output whenever the input is not already marked as &amp;ldquo;safe&amp;rdquo;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</field>
+    <field type="CharField" name="location">constituent_docs</field>
+  </object>
+  <object pk="4" model="att_tech_app.articlewithdocuments">
+    <field type="CharField" name="title">Образцы документов</field>
+    <field type="TextField" name="text">&lt;ol class="arabic" style="padding-left: 30px; margin-left: 0px; margin-right: 0px; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;When this filter is used in a template where auto-escaping is enabled, Django will escape the output whenever the input is not already marked as &amp;ldquo;safe&amp;rdquo;.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;By default,&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;, and you can omit it from any filters where it isn&amp;rsquo;t required.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Be careful when deciding if your filter really does leave safe strings as safe. If you&amp;rsquo;re&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;removing&lt;/em&gt;&amp;nbsp;characters, you might inadvertently leave unbalanced HTML tags or entities in the result. For example, removing a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;from the input might turn&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&amp;gt;&lt;/tt&gt;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&lt;/tt&gt;, which would need to be escaped on output to avoid causing problems. Similarly, removing a semicolon (&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;;&lt;/tt&gt;) can turn&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp;&lt;/tt&gt;&amp;nbsp;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp&lt;/tt&gt;, which is no longer a valid entity and thus needs further escaping. Most cases won&amp;rsquo;t be nearly this tricky, but keep an eye out for any problems like that when reviewing your code.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Marking a filter&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will coerce the filter&amp;rsquo;s return value to a string. If your filter should return a boolean or other non-string value, marking it&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will probably have unintended consequences (such as converting a boolean False to the string &amp;lsquo;False&amp;rsquo;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p class="first" style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Alternatively, your filter code can manually take care of any necessary escaping. This is necessary when you&amp;rsquo;re introducing new HTML markup into the result. You want to mark the output as safe from further escaping so that your HTML markup isn&amp;rsquo;t escaped further, so you&amp;rsquo;ll need to handle the input yourself.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;To mark the output as a safe string, use&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.utils.safestring.mark_safe" href="https://docs.djangoproject.com/en/dev/ref/utils/#django.utils.safestring.mark_safe"&gt;&lt;tt class="xref py py-func docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span class="pre" style="margin-left: 0px; margin-right: 0px;"&gt;django.utils.safestring.mark_safe()&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Be careful, though. You need to do more than just mark the output as safe. You need to ensure it really&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;is&lt;/em&gt;&amp;nbsp;safe, and what you do depends on whether auto-escaping is in effect. The idea is to write filters than can operate in templates where auto-escaping is either on or off in order to make things easier for your template authors.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;In order for your filter to know the current auto-escaping state, set the&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;needs_autoescape&lt;/tt&gt;&amp;nbsp;flag to&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;True&lt;/tt&gt;&amp;nbsp;when you register your filter function. (If you don&amp;rsquo;t specify this flag, it defaults to&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;). This flag tells Django that your filter function wants to be passed an extra keyword argument, called&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;autoescape&lt;/tt&gt;, that is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;True&lt;/tt&gt;&amp;nbsp;if auto-escaping is in effect and&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;&amp;nbsp;otherwise.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;For example, let&amp;rsquo;s write a filter that emphasizes the first character of a string:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</field>
+    <field type="CharField" name="location">docs_samples</field>
+  </object>
+  <object pk="5" model="att_tech_app.articlewithdocuments">
+    <field type="CharField" name="title">Зачисление</field>
+    <field type="TextField" name="text">&lt;ol class="arabic" style="padding-left: 30px; margin-left: 0px; margin-right: 0px; font-family: Verdana, sans-serif; font-size: 12px; line-height: 16px;"&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;When this filter is used in a template where auto-escaping is enabled, Django will escape the output whenever the input is not already marked as &amp;ldquo;safe&amp;rdquo;.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;By default,&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;, and you can omit it from any filters where it isn&amp;rsquo;t required.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Be careful when deciding if your filter really does leave safe strings as safe. If you&amp;rsquo;re&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;removing&lt;/em&gt;&amp;nbsp;characters, you might inadvertently leave unbalanced HTML tags or entities in the result. For example, removing a&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;gt;&lt;/tt&gt;&amp;nbsp;from the input might turn&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&amp;gt;&lt;/tt&gt;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;lt;a&lt;/tt&gt;, which would need to be escaped on output to avoid causing problems. Similarly, removing a semicolon (&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;;&lt;/tt&gt;) can turn&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp;&lt;/tt&gt;&amp;nbsp;into&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;&amp;amp;amp&lt;/tt&gt;, which is no longer a valid entity and thus needs further escaping. Most cases won&amp;rsquo;t be nearly this tricky, but keep an eye out for any problems like that when reviewing your code.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Marking a filter&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will coerce the filter&amp;rsquo;s return value to a string. If your filter should return a boolean or other non-string value, marking it&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;is_safe&lt;/tt&gt;&amp;nbsp;will probably have unintended consequences (such as converting a boolean False to the string &amp;lsquo;False&amp;rsquo;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li style="margin-left: 0px; margin-right: 0px;"&gt;
+&lt;p class="first" style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Alternatively, your filter code can manually take care of any necessary escaping. This is necessary when you&amp;rsquo;re introducing new HTML markup into the result. You want to mark the output as safe from further escaping so that your HTML markup isn&amp;rsquo;t escaped further, so you&amp;rsquo;ll need to handle the input yourself.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;To mark the output as a safe string, use&amp;nbsp;&lt;a class="reference internal" style="text-decoration: none; color: #ab5603; margin-left: 0px; margin-right: 0px;" title="django.utils.safestring.mark_safe" href="https://docs.djangoproject.com/en/dev/ref/utils/#django.utils.safestring.mark_safe"&gt;&lt;tt class="xref py py-func docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px; border-bottom-width: 1px; border-bottom-color: #234f32; border-bottom-style: dotted;"&gt;&lt;span class="pre" style="margin-left: 0px; margin-right: 0px;"&gt;django.utils.safestring.mark_safe()&lt;/span&gt;&lt;/tt&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;Be careful, though. You need to do more than just mark the output as safe. You need to ensure it really&amp;nbsp;&lt;em style="margin-left: 0px; margin-right: 0px;"&gt;is&lt;/em&gt;&amp;nbsp;safe, and what you do depends on whether auto-escaping is in effect. The idea is to write filters than can operate in templates where auto-escaping is either on or off in order to make things easier for your template authors.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;In order for your filter to know the current auto-escaping state, set the&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;needs_autoescape&lt;/tt&gt;&amp;nbsp;flag to&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;True&lt;/tt&gt;&amp;nbsp;when you register your filter function. (If you don&amp;rsquo;t specify this flag, it defaults to&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;). This flag tells Django that your filter function wants to be passed an extra keyword argument, called&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;autoescape&lt;/tt&gt;, that is&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;True&lt;/tt&gt;&amp;nbsp;if auto-escaping is in effect and&amp;nbsp;&lt;tt class="docutils literal" style="white-space: nowrap; color: #234f32; margin-left: 0px; margin-right: 0px;"&gt;False&lt;/tt&gt;&amp;nbsp;otherwise.&lt;/p&gt;
+&lt;p style="margin: 0.6em 0px 0.8em; text-align: justify;"&gt;For example, let&amp;rsquo;s write a filter that emphasizes the first character of a string:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</field>
+    <field type="CharField" name="location">acceptance</field>
+  </object>
+  <object pk="1" model="att_tech_app.new">
+    <field type="CharField" name="title">Открыта новая специальность</field>
+    <field type="TextField" name="short_text">&lt;p&gt;Открыта новая специальность - Плотник. Обучение длится 3 года. Список студентов формируется на общей основе. Проходной балл - 82.&amp;nbsp;&lt;/p&gt;</field>
+    <field type="TextField" name="full_text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project. Для этого надо сначала настроить наш дебаггер, в меню Debug&amp;rarr;Node.js Debugging, или просто нажав Alt+D,E,C.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;У меня не было времени сделать нормальный UI для настроек, поэтому сейчас они представляют из себя просто JSON-файл (с комментами). В комменте в начале файла описаны доступные настройки и что они означают. Сохранются они в файл с именем ".nodevsdbg" в корне веб-сайта или рядом с файлом проекта.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;После того, как настройки сделаны, можно запускать дебаггер с помощью Ctrl+E,Ctrl+A. Я рекомендую забиндидь на эту команду клавишу F5, и тогда для проектов где нет настроек нодного дебаггера, или он выключен в конфиге (mode=&amp;laquo;off&amp;raquo;) будет запускаться стандартный дебаггер.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Естественно, я планирую потом сделать nodejs-project которому будет прописан кастомный дебаггер, и все эти костыли не понадобятся.&lt;/span&gt;&lt;/p&gt;</field>
+    <field type="CharField" name="main_photo"></field>
+    <field type="DateField" name="date_added">2013-03-10</field>
+    <field type="BooleanField" name="is_event">False</field>
+  </object>
+  <object pk="2" model="att_tech_app.new">
+    <field type="CharField" name="title">Открыта новая профессия</field>
+    <field type="TextField" name="short_text">&lt;p&gt;Открыта новая профессия - Плотник. Обучение длится 3 года. Список студентов формируется на общей основе. Проходной балл - 82.&amp;nbsp;&lt;/p&gt;</field>
+    <field type="TextField" name="full_text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project. Для этого надо сначала настроить наш дебаггер, в меню Debug&amp;rarr;Node.js Debugging, или просто нажав Alt+D,E,C.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;У меня не было времени сделать нормальный UI для настроек, поэтому сейчас они представляют из себя просто JSON-файл (с комментами). В комменте в начале файла описаны доступные настройки и что они означают. Сохранются они в файл с именем ".nodevsdbg" в корне веб-сайта или рядом с файлом проекта.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;После того, как настройки сделаны, можно запускать дебаггер с помощью Ctrl+E,Ctrl+A. Я рекомендую забиндидь на эту команду клавишу F5, и тогда для проектов где нет настроек нодного дебаггера, или он выключен в конфиге (mode=&amp;laquo;off&amp;raquo;) будет запускаться стандартный дебаггер.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Естественно, я планирую потом сделать nodejs-project которому будет прописан кастомный дебаггер, и все эти костыли не понадобятся.&lt;/span&gt;&lt;/p&gt;</field>
+    <field type="CharField" name="main_photo"></field>
+    <field type="DateField" name="date_added">2013-03-10</field>
+    <field type="BooleanField" name="is_event">False</field>
+  </object>
+  <object pk="3" model="att_tech_app.new">
+    <field type="CharField" name="title">Строительство нового корпуса</field>
+    <field type="TextField" name="short_text">&lt;p&gt;Открыта новая специальность - Плотник. Обучение длится 3 года. Список студентов формируется на общей основе. Проходной балл - 82.&amp;nbsp;&lt;/p&gt;</field>
+    <field type="TextField" name="full_text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project. Для этого надо сначала настроить наш дебаггер, в меню Debug&amp;rarr;Node.js Debugging, или просто нажав Alt+D,E,C.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;У меня не было времени сделать нормальный UI для настроек, поэтому сейчас они представляют из себя просто JSON-файл (с комментами). В комменте в начале файла описаны доступные настройки и что они означают. Сохранются они в файл с именем ".nodevsdbg" в корне веб-сайта или рядом с файлом проекта.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;После того, как настройки сделаны, можно запускать дебаггер с помощью Ctrl+E,Ctrl+A. Я рекомендую забиндидь на эту команду клавишу F5, и тогда для проектов где нет настроек нодного дебаггера, или он выключен в конфиге (mode=&amp;laquo;off&amp;raquo;) будет запускаться стандартный дебаггер.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Естественно, я планирую потом сделать nodejs-project которому будет прописан кастомный дебаггер, и все эти костыли не понадобятся.&lt;/span&gt;&lt;/p&gt;</field>
+    <field type="CharField" name="main_photo"></field>
+    <field type="DateField" name="date_added">2013-03-10</field>
+    <field type="BooleanField" name="is_event">False</field>
+  </object>
+  <object pk="4" model="att_tech_app.new">
+    <field type="CharField" name="title">Летний отдых студентов</field>
+    <field type="TextField" name="short_text">&lt;p&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project.&amp;nbsp;&lt;/p&gt;</field>
+    <field type="TextField" name="full_text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project. Для этого надо сначала настроить наш дебаггер, в меню Debug&amp;rarr;Node.js Debugging, или просто нажав Alt+D,E,C.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;У меня не было времени сделать нормальный UI для настроек, поэтому сейчас они представляют из себя просто JSON-файл (с комментами). В комменте в начале файла описаны доступные настройки и что они означают. Сохранются они в файл с именем ".nodevsdbg" в корне веб-сайта или рядом с файлом проекта.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;После того, как настройки сделаны, можно запускать дебаггер с помощью Ctrl+E,Ctrl+A. Я рекомендую забиндидь на эту команду клавишу F5, и тогда для проектов где нет настроек нодного дебаггера, или он выключен в конфиге (mode=&amp;laquo;off&amp;raquo;) будет запускаться стандартный дебаггер.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Естественно, я планирую потом сделать nodejs-project которому будет прописан кастомный дебаггер, и все эти костыли не понадобятся.&lt;/span&gt;&lt;/p&gt;</field>
+    <field type="CharField" name="main_photo"></field>
+    <field type="DateField" name="date_added">2013-03-10</field>
+    <field type="BooleanField" name="is_event">False</field>
+  </object>
+  <object pk="5" model="att_tech_app.new">
+    <field type="CharField" name="title">Ремонт классов</field>
+    <field type="TextField" name="short_text">&lt;p&gt;Открыта новая специальность - Плотник. Обучение длится 3 года. Список студентов формируется на общей основе. Проходной балл - 82.&amp;nbsp;&lt;/p&gt;</field>
+    <field type="TextField" name="full_text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project. Для этого надо сначала настроить наш дебаггер, в меню Debug&amp;rarr;Node.js Debugging, или просто нажав Alt+D,E,C.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;У меня не было времени сделать нормальный UI для настроек, поэтому сейчас они представляют из себя просто JSON-файл (с комментами). В комменте в начале файла описаны доступные настройки и что они означают. Сохранются они в файл с именем ".nodevsdbg" в корне веб-сайта или рядом с файлом проекта.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;После того, как настройки сделаны, можно запускать дебаггер с помощью Ctrl+E,Ctrl+A. Я рекомендую забиндидь на эту команду клавишу F5, и тогда для проектов где нет настроек нодного дебаггера, или он выключен в конфиге (mode=&amp;laquo;off&amp;raquo;) будет запускаться стандартный дебаггер.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Естественно, я планирую потом сделать nodejs-project которому будет прописан кастомный дебаггер, и все эти костыли не понадобятся.&lt;/span&gt;&lt;/p&gt;</field>
+    <field type="CharField" name="main_photo"></field>
+    <field type="DateField" name="date_added">2013-03-10</field>
+    <field type="BooleanField" name="is_event">False</field>
+  </object>
+  <object pk="6" model="att_tech_app.new">
+    <field type="CharField" name="title">Открыта новая специальность 1</field>
+    <field type="TextField" name="short_text">&lt;p&gt;Открыта новая специальность - Плотник. Обучение длится 3 года. Список студентов формируется на общей основе. Проходной балл - 82.&amp;nbsp;&lt;/p&gt;</field>
+    <field type="TextField" name="full_text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project. Для этого надо сначала настроить наш дебаггер, в меню Debug&amp;rarr;Node.js Debugging, или просто нажав Alt+D,E,C.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;У меня не было времени сделать нормальный UI для настроек, поэтому сейчас они представляют из себя просто JSON-файл (с комментами). В комменте в начале файла описаны доступные настройки и что они означают. Сохранются они в файл с именем ".nodevsdbg" в корне веб-сайта или рядом с файлом проекта.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;После того, как настройки сделаны, можно запускать дебаггер с помощью Ctrl+E,Ctrl+A. Я рекомендую забиндидь на эту команду клавишу F5, и тогда для проектов где нет настроек нодного дебаггера, или он выключен в конфиге (mode=&amp;laquo;off&amp;raquo;) будет запускаться стандартный дебаггер.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Естественно, я планирую потом сделать nodejs-project которому будет прописан кастомный дебаггер, и все эти костыли не понадобятся.&lt;/span&gt;&lt;/p&gt;</field>
+    <field type="CharField" name="main_photo"></field>
+    <field type="DateField" name="date_added">2013-03-10</field>
+    <field type="BooleanField" name="is_event">True</field>
+  </object>
+  <object pk="7" model="att_tech_app.new">
+    <field type="CharField" name="title">Открыта новая профессия 1</field>
+    <field type="TextField" name="short_text">&lt;p&gt;Открыта новая профессия - Плотник. Обучение длится 3 года. Список студентов формируется на общей основе. Проходной балл - 82.&amp;nbsp;&lt;/p&gt;</field>
+    <field type="TextField" name="full_text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project. Для этого надо сначала настроить наш дебаггер, в меню Debug&amp;rarr;Node.js Debugging, или просто нажав Alt+D,E,C.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;У меня не было времени сделать нормальный UI для настроек, поэтому сейчас они представляют из себя просто JSON-файл (с комментами). В комменте в начале файла описаны доступные настройки и что они означают. Сохранются они в файл с именем ".nodevsdbg" в корне веб-сайта или рядом с файлом проекта.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;После того, как настройки сделаны, можно запускать дебаггер с помощью Ctrl+E,Ctrl+A. Я рекомендую забиндидь на эту команду клавишу F5, и тогда для проектов где нет настроек нодного дебаггера, или он выключен в конфиге (mode=&amp;laquo;off&amp;raquo;) будет запускаться стандартный дебаггер.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Естественно, я планирую потом сделать nodejs-project которому будет прописан кастомный дебаггер, и все эти костыли не понадобятся.&lt;/span&gt;&lt;/p&gt;</field>
+    <field type="CharField" name="main_photo"></field>
+    <field type="DateField" name="date_added">2013-03-10</field>
+    <field type="BooleanField" name="is_event">True</field>
+  </object>
+  <object pk="8" model="att_tech_app.new">
+    <field type="CharField" name="title">Строительство нового корпуса 1</field>
+    <field type="TextField" name="short_text">&lt;p&gt;Открыта новая специальность - Плотник. Обучение длится 3 года. Список студентов формируется на общей основе. Проходной балл - 82.&amp;nbsp;&lt;/p&gt;</field>
+    <field type="TextField" name="full_text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project. Для этого надо сначала настроить наш дебаггер, в меню Debug&amp;rarr;Node.js Debugging, или просто нажав Alt+D,E,C.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;У меня не было времени сделать нормальный UI для настроек, поэтому сейчас они представляют из себя просто JSON-файл (с комментами). В комменте в начале файла описаны доступные настройки и что они означают. Сохранются они в файл с именем ".nodevsdbg" в корне веб-сайта или рядом с файлом проекта.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;После того, как настройки сделаны, можно запускать дебаггер с помощью Ctrl+E,Ctrl+A. Я рекомендую забиндидь на эту команду клавишу F5, и тогда для проектов где нет настроек нодного дебаггера, или он выключен в конфиге (mode=&amp;laquo;off&amp;raquo;) будет запускаться стандартный дебаггер.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Естественно, я планирую потом сделать nodejs-project которому будет прописан кастомный дебаггер, и все эти костыли не понадобятся.&lt;/span&gt;&lt;/p&gt;</field>
+    <field type="CharField" name="main_photo"></field>
+    <field type="DateField" name="date_added">2013-03-10</field>
+    <field type="BooleanField" name="is_event">True</field>
+  </object>
+  <object pk="9" model="att_tech_app.new">
+    <field type="CharField" name="title">Летний отдых студентов 1</field>
+    <field type="TextField" name="short_text">&lt;p&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project.&amp;nbsp;&lt;/p&gt;</field>
+    <field type="TextField" name="full_text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project. Для этого надо сначала настроить наш дебаггер, в меню Debug&amp;rarr;Node.js Debugging, или просто нажав Alt+D,E,C.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;У меня не было времени сделать нормальный UI для настроек, поэтому сейчас они представляют из себя просто JSON-файл (с комментами). В комменте в начале файла описаны доступные настройки и что они означают. Сохранются они в файл с именем ".nodevsdbg" в корне веб-сайта или рядом с файлом проекта.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;После того, как настройки сделаны, можно запускать дебаггер с помощью Ctrl+E,Ctrl+A. Я рекомендую забиндидь на эту команду клавишу F5, и тогда для проектов где нет настроек нодного дебаггера, или он выключен в конфиге (mode=&amp;laquo;off&amp;raquo;) будет запускаться стандартный дебаггер.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Естественно, я планирую потом сделать nodejs-project которому будет прописан кастомный дебаггер, и все эти костыли не понадобятся.&lt;/span&gt;&lt;/p&gt;</field>
+    <field type="CharField" name="main_photo"></field>
+    <field type="DateField" name="date_added">2013-03-10</field>
+    <field type="BooleanField" name="is_event">True</field>
+  </object>
+  <object pk="10" model="att_tech_app.new">
+    <field type="CharField" name="title">Ремонт классов 1</field>
+    <field type="TextField" name="short_text">&lt;p&gt;Открыта новая специальность - Плотник. Обучение длится 3 года. Список студентов формируется на общей основе. Проходной балл - 82.&amp;nbsp;&lt;/p&gt;</field>
+    <field type="TextField" name="full_text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;На данный момент отладка проектов прикручена в виде костыля, и отлаживать в ноде можно практически любой проект, будь то веб-сайт, веб-приложение, или вообще C# или C++ makefile project. Для этого надо сначала настроить наш дебаггер, в меню Debug&amp;rarr;Node.js Debugging, или просто нажав Alt+D,E,C.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;У меня не было времени сделать нормальный UI для настроек, поэтому сейчас они представляют из себя просто JSON-файл (с комментами). В комменте в начале файла описаны доступные настройки и что они означают. Сохранются они в файл с именем ".nodevsdbg" в корне веб-сайта или рядом с файлом проекта.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;После того, как настройки сделаны, можно запускать дебаггер с помощью Ctrl+E,Ctrl+A. Я рекомендую забиндидь на эту команду клавишу F5, и тогда для проектов где нет настроек нодного дебаггера, или он выключен в конфиге (mode=&amp;laquo;off&amp;raquo;) будет запускаться стандартный дебаггер.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Естественно, я планирую потом сделать nodejs-project которому будет прописан кастомный дебаггер, и все эти костыли не понадобятся.&lt;/span&gt;&lt;/p&gt;</field>
+    <field type="CharField" name="main_photo"></field>
+    <field type="DateField" name="date_added">2013-03-10</field>
+    <field type="BooleanField" name="is_event">True</field>
+  </object>
+  <object pk="1" model="att_tech_app.profession">
+    <field type="CharField" name="name">Сварщик</field>
+    <field type="CharField" name="meta_info">Код: 12-44-533-08. Обучение: 2 года.</field>
+    <field type="BooleanField" name="speciality">False</field>
+    <field type="TextField" name="text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Целью данной статьи является написание небольшого обзора возможностей по развертыванию различных систем через WDS (Windows Deployment Services)&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;В статье будут приводиться краткие инструкции для развертывания Windows 7 x64, Windows XP x86, Ubuntu x64 и добавление таких полезных инструментов в загрузку по сети как Memtest и Gparted.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;История будет рассказывать в порядке приходящих мне в голову идей. И начиналось все с Microsoft&amp;hellip;&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;a style="margin: 0px; padding: 0px; border: 0px; font-size: 13px; vertical-align: baseline; outline: 0px; color: #6da3bd; font-family: Verdana, sans-serif; line-height: 20px; text-align: left;" name="habracut"&gt;&lt;/a&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;А теперь сама история:&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Не так давно мне пришла в голову здравая идея разворачивать на работе системы с помощью WDS. Если за нас кто-то делает работу, это приятно. А если при этом мы узнаем что-то новое &amp;mdash; это приятно в двойне. Не буду очень подробно останавливаться на описании установки роли WDS &amp;mdash; Microsoft все сводит к Далее-Далее-Далее и статей на эту тему &amp;mdash; горы. И кратко расскажу про работу с образами Windows с остановкой на тех моментах, которые вызвали у меня затруднения. Боле подробно будут описаны системы не от Microsoft (ради чего статья и затевалась).&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Приступим.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Сервер, который будет выступать в роли хранилища образов и координатора действий имеет Windows Server 2008 R2 на борту. Для корректной работы этой службы необходимы такие роли как DHCP и DNS. Ну и AD &amp;mdash; для ввода машинок в домен. (Все эти роли не обязательно держать на одной машине, они могут быть размазаны по всей структуре. Главное, чтобы корректно работали)&lt;/span&gt;&lt;/p&gt;
+&lt;div id="dc_vk_code" style="display: none;"&gt;&amp;nbsp;&lt;/div&gt;</field>
+  </object>
+  <object pk="2" model="att_tech_app.profession">
+    <field type="CharField" name="name">Плотник</field>
+    <field type="CharField" name="meta_info">11-22-333-44</field>
+    <field type="BooleanField" name="speciality">False</field>
+    <field type="TextField" name="text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;&lt;img style="float: left; margin: 10px;" src="https://dl.dropbox.com/u/930819/att_tech/3.jpg" alt="" width="300" height="200" /&gt;Целью данной статьи является написание небольшого обзора возможностей по развертыванию различных систем через WDS (Windows Deployment Services)&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;В статье будут приводиться краткие инструкции для развертывания Windows 7 x64, Windows XP x86, Ubuntu x64 и добавление таких полезных инструментов в загрузку по сети как Memtest и Gparted.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;История будет рассказывать в порядке приходящих мне в голову идей. И начиналось все с Microsoft&amp;hellip;&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;a style="margin: 0px; padding: 0px; border: 0px; font-size: 13px; vertical-align: baseline; outline: 0px; color: #6da3bd; font-family: Verdana, sans-serif; line-height: 20px; text-align: left;" name="habracut"&gt;&lt;/a&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;А теперь сама история:&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Не так давно мне пришла в голову здравая идея разворачивать на работе системы с помощью WDS. Если за нас кто-то делает работу, это приятно. А если при этом мы узнаем что-то новое &amp;mdash; это приятно в двойне. Не буду очень подробно останавливаться на описании установки роли WDS &amp;mdash; Microsoft все сводит к Далее-Далее-Далее и статей на эту тему &amp;mdash; горы. И кратко расскажу про работу с образами Windows с остановкой на тех моментах, которые вызвали у меня затруднения. Боле подробно будут описаны системы не от Microsoft (ради чего статья и затевалась).&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Приступим.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Сервер, который будет выступать в роли хранилища образов и координатора действий имеет Windows Server 2008 R2 на борту. Для корректной работы этой службы необходимы такие роли как DHCP и DNS. Ну и AD &amp;mdash; для ввода машинок в домен. (Все эти роли не обязательно держать на одной машине, они могут быть размазаны по всей структуре. Главное, чтобы корректно работали)&lt;/span&gt;&lt;/p&gt;</field>
+  </object>
+  <object pk="3" model="att_tech_app.profession">
+    <field type="CharField" name="name">Техник</field>
+    <field type="CharField" name="meta_info">345-123-345</field>
+    <field type="BooleanField" name="speciality">False</field>
+    <field type="TextField" name="text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Целью данной статьи является написание небольшого обзора возможностей по развертыванию различных систем через WDS (Windows Deployment Services)&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;В статье будут приводиться краткие инструкции для развертывания Windows 7 x64, Windows XP x86, Ubuntu x64 и добавление таких полезных инструментов в загрузку по сети как Memtest и Gparted.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;История будет рассказывать в порядке приходящих мне в голову идей. И начиналось все с Microsoft&amp;hellip;&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;a style="margin: 0px; padding: 0px; border: 0px; font-size: 13px; vertical-align: baseline; outline: 0px; color: #6da3bd; font-family: Verdana, sans-serif; line-height: 20px; text-align: left;" name="habracut"&gt;&lt;/a&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;А теперь сама история:&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Не так давно мне пришла в голову здравая идея разворачивать на работе системы с помощью WDS. Если за нас кто-то делает работу, это приятно. А если при этом мы узнаем что-то новое &amp;mdash; это приятно в двойне. Не буду очень подробно останавливаться на описании установки роли WDS &amp;mdash; Microsoft все сводит к Далее-Далее-Далее и статей на эту тему &amp;mdash; горы. И кратко расскажу про работу с образами Windows с остановкой на тех моментах, которые вызвали у меня затруднения. Боле подробно будут описаны системы не от Microsoft (ради чего статья и затевалась).&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Приступим.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Сервер, который будет выступать в роли хранилища образов и координатора действий имеет Windows Server 2008 R2 на борту. Для корректной работы этой службы необходимы такие роли как DHCP и DNS. Ну и AD &amp;mdash; для ввода машинок в домен. (Все эти роли не обязательно держать на одной машине, они могут быть размазаны по всей структуре. Главное, чтобы корректно работали)&lt;/span&gt;&lt;/p&gt;</field>
+  </object>
+  <object pk="4" model="att_tech_app.profession">
+    <field type="CharField" name="name">Математик</field>
+    <field type="CharField" name="meta_info">00-11-23</field>
+    <field type="BooleanField" name="speciality">True</field>
+    <field type="TextField" name="text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Целью данной статьи является написание небольшого обзора возможностей по развертыванию различных систем через WDS (Windows Deployment Services)&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;В статье будут приводиться краткие инструкции для развертывания Windows 7 x64, Windows XP x86, Ubuntu x64 и добавление таких полезных инструментов в загрузку по сети как Memtest и Gparted.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;История будет рассказывать в порядке приходящих мне в голову идей. И начиналось все с Microsoft&amp;hellip;&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;a style="margin: 0px; padding: 0px; border: 0px; font-size: 13px; vertical-align: baseline; outline: 0px; color: #6da3bd; font-family: Verdana, sans-serif; line-height: 20px; text-align: left;" name="habracut"&gt;&lt;/a&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;А теперь сама история:&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Не так давно мне пришла в голову здравая идея разворачивать на работе системы с помощью WDS. Если за нас кто-то делает работу, это приятно. А если при этом мы узнаем что-то новое &amp;mdash; это приятно в двойне. Не буду очень подробно останавливаться на описании установки роли WDS &amp;mdash; Microsoft все сводит к Далее-Далее-Далее и статей на эту тему &amp;mdash; горы. И кратко расскажу про работу с образами Windows с остановкой на тех моментах, которые вызвали у меня затруднения. Боле подробно будут описаны системы не от Microsoft (ради чего статья и затевалась).&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Приступим.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Сервер, который будет выступать в роли хранилища образов и координатора действий имеет Windows Server 2008 R2 на борту. Для корректной работы этой службы необходимы такие роли как DHCP и DNS. Ну и AD &amp;mdash; для ввода машинок в домен. (Все эти роли не обязательно держать на одной машине, они могут быть размазаны по всей структуре. Главное, чтобы корректно работали)&lt;/span&gt;&lt;/p&gt;</field>
+  </object>
+  <object pk="5" model="att_tech_app.profession">
+    <field type="CharField" name="name">Физик</field>
+    <field type="CharField" name="meta_info">2435-234</field>
+    <field type="BooleanField" name="speciality">True</field>
+    <field type="TextField" name="text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Целью данной статьи является написание небольшого обзора возможностей по развертыванию различных систем через WDS (Windows Deployment Services)&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;В статье будут приводиться краткие инструкции для развертывания Windows 7 x64, Windows XP x86, Ubuntu x64 и добавление таких полезных инструментов в загрузку по сети как Memtest и Gparted.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;История будет рассказывать в порядке приходящих мне в голову идей. И начиналось все с Microsoft&amp;hellip;&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;a style="margin: 0px; padding: 0px; border: 0px; font-size: 13px; vertical-align: baseline; outline: 0px; color: #6da3bd; font-family: Verdana, sans-serif; line-height: 20px; text-align: left;" name="habracut"&gt;&lt;/a&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;А теперь сама история:&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Не так давно мне пришла в голову здравая идея разворачивать на работе системы с помощью WDS. Если за нас кто-то делает работу, это приятно. А если при этом мы узнаем что-то новое &amp;mdash; это приятно в двойне. Не буду очень подробно останавливаться на описании установки роли WDS &amp;mdash; Microsoft все сводит к Далее-Далее-Далее и статей на эту тему &amp;mdash; горы. И кратко расскажу про работу с образами Windows с остановкой на тех моментах, которые вызвали у меня затруднения. Боле подробно будут описаны системы не от Microsoft (ради чего статья и затевалась).&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Приступим.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Сервер, который будет выступать в роли хранилища образов и координатора действий имеет Windows Server 2008 R2 на борту. Для корректной работы этой службы необходимы такие роли как DHCP и DNS. Ну и AD &amp;mdash; для ввода машинок в домен. (Все эти роли не обязательно держать на одной машине, они могут быть размазаны по всей структуре. Главное, чтобы корректно работали)&lt;/span&gt;&lt;/p&gt;</field>
+  </object>
+  <object pk="6" model="att_tech_app.profession">
+    <field type="CharField" name="name">Ядерщик</field>
+    <field type="CharField" name="meta_info">456-122-44</field>
+    <field type="BooleanField" name="speciality">True</field>
+    <field type="TextField" name="text">&lt;p&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Целью данной статьи является написание небольшого обзора возможностей по развертыванию различных систем через WDS (Windows Deployment Services)&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;В статье будут приводиться краткие инструкции для развертывания Windows 7 x64, Windows XP x86, Ubuntu x64 и добавление таких полезных инструментов в загрузку по сети как Memtest и Gparted.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;История будет рассказывать в порядке приходящих мне в голову идей. И начиналось все с Microsoft&amp;hellip;&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;a style="margin: 0px; padding: 0px; border: 0px; font-size: 13px; vertical-align: baseline; outline: 0px; color: #6da3bd; font-family: Verdana, sans-serif; line-height: 20px; text-align: left;" name="habracut"&gt;&lt;/a&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;А теперь сама история:&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Не так давно мне пришла в голову здравая идея разворачивать на работе системы с помощью WDS. Если за нас кто-то делает работу, это приятно. А если при этом мы узнаем что-то новое &amp;mdash; это приятно в двойне. Не буду очень подробно останавливаться на описании установки роли WDS &amp;mdash; Microsoft все сводит к Далее-Далее-Далее и статей на эту тему &amp;mdash; горы. И кратко расскажу про работу с образами Windows с остановкой на тех моментах, которые вызвали у меня затруднения. Боле подробно будут описаны системы не от Microsoft (ради чего статья и затевалась).&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Приступим.&lt;/span&gt;&lt;br style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;" /&gt;&lt;span style="font-family: Verdana, sans-serif; font-size: 13px; line-height: 20px; text-align: left;"&gt;Сервер, который будет выступать в роли хранилища образов и координатора действий имеет Windows Server 2008 R2 на борту. Для корректной работы этой службы необходимы такие роли как DHCP и DNS. Ну и AD &amp;mdash; для ввода машинок в домен. (Все эти роли не обязательно держать на одной машине, они могут быть размазаны по всей структуре. Главное, чтобы корректно работали)&lt;/span&gt;&lt;/p&gt;</field>
+  </object>
+  <object pk="1" model="att_tech_app.person">
+    <field type="CharField" name="full_name">Артюхин Сергей Максимович</field>
+    <field type="CharField" name="photo">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n.jpg</field>
+    <field type="CharField" name="position">Директор</field>
+    <field type="CharField" name="contacts">76-57-24</field>
+    <field type="BooleanField" name="master_status">True</field>
+  </object>
+  <object pk="2" model="att_tech_app.person">
+    <field type="CharField" name="full_name">Алла Борисовна Чеснокова</field>
+    <field type="CharField" name="photo">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n.jpg</field>
+    <field type="CharField" name="position">Старший преподаватель</field>
+    <field type="CharField" name="contacts">44-15-46</field>
+    <field type="BooleanField" name="master_status">True</field>
+  </object>
+  <object pk="3" model="att_tech_app.person">
+    <field type="CharField" name="full_name">Иванов Иван Иванович</field>
+    <field type="CharField" name="photo">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n.jpg</field>
+    <field type="CharField" name="position"></field>
+    <field type="CharField" name="contacts"></field>
+    <field type="BooleanField" name="master_status">False</field>
+  </object>
+  <object pk="4" model="att_tech_app.person">
+    <field type="CharField" name="full_name">Васильева Анна Ивановна</field>
+    <field type="CharField" name="photo">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+    <field type="CharField" name="position">Руководитель по научной работе</field>
+    <field type="CharField" name="contacts">12-13-14</field>
+    <field type="BooleanField" name="master_status">True</field>
+  </object>
+  <object pk="5" model="att_tech_app.person">
+    <field type="CharField" name="full_name">Петров Петр Петрович</field>
+    <field type="CharField" name="photo"></field>
+    <field type="CharField" name="position"></field>
+    <field type="CharField" name="contacts"></field>
+    <field type="BooleanField" name="master_status">False</field>
+  </object>
+  <object pk="1" model="att_tech_app.discipline">
+    <field type="CharField" name="name">Математика</field>
+    <field to="att_tech_app.person" name="tutor" rel="ManyToOneRel">2</field>
+    <field to="att_tech_app.disciplinetype" name="discipline_type" rel="ManyToOneRel">1</field>
+  </object>
+  <object pk="2" model="att_tech_app.discipline">
+    <field type="CharField" name="name">Физика</field>
+    <field to="att_tech_app.person" name="tutor" rel="ManyToOneRel">2</field>
+    <field to="att_tech_app.disciplinetype" name="discipline_type" rel="ManyToOneRel">2</field>
+  </object>
+  <object pk="3" model="att_tech_app.discipline">
+    <field type="CharField" name="name">Русский язык</field>
+    <field to="att_tech_app.person" name="tutor" rel="ManyToOneRel">2</field>
+    <field to="att_tech_app.disciplinetype" name="discipline_type" rel="ManyToOneRel">3</field>
+  </object>
+  <object pk="4" model="att_tech_app.discipline">
+    <field type="CharField" name="name">Русский язык</field>
+    <field to="att_tech_app.person" name="tutor" rel="ManyToOneRel">3</field>
+    <field to="att_tech_app.disciplinetype" name="discipline_type" rel="ManyToOneRel">3</field>
+  </object>
+  <object pk="5" model="att_tech_app.discipline">
+    <field type="CharField" name="name">Химия</field>
+    <field to="att_tech_app.person" name="tutor" rel="ManyToOneRel">5</field>
+    <field to="att_tech_app.disciplinetype" name="discipline_type" rel="ManyToOneRel">3</field>
+  </object>
+  <object pk="1" model="att_tech_app.disciplinetype">
+    <field type="CharField" name="discipline_type">Общие дисциплины</field>
+  </object>
+  <object pk="2" model="att_tech_app.disciplinetype">
+    <field type="CharField" name="discipline_type">Специальные дисциплины</field>
+  </object>
+  <object pk="3" model="att_tech_app.disciplinetype">
+    <field type="CharField" name="discipline_type">Особые дисциплины</field>
+  </object>
+  <object pk="1" model="att_tech_app.contacts">
+    <field type="TextField" name="contacts">&lt;p&gt;ОГОУ СПО "АВТОТРАНСПОРТНЫЙ ТЕХНИКУМ ИМ. С. А. ЖИВАГО".&lt;/p&gt;
+&lt;p&gt;Ул. Полевая, дом 17/1.&lt;/p&gt;
+&lt;p&gt;Телефон: 12-13-55.&lt;/p&gt;
+&lt;p&gt;Телефон: 12-13-56.&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;</field>
+  </object>
+  <object pk="1" model="att_tech_app.document">
+    <field type="CharField" name="name">Лицензия на преподавание</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/sources.zip</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">1</field>
+  </object>
+  <object pk="2" model="att_tech_app.document">
+    <field type="CharField" name="name">Разрешение на проведение образовательной работы образовательной работы образовательной работы образовательной работы</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/sources.zip</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">1</field>
+  </object>
+  <object pk="3" model="att_tech_app.document">
+    <field type="CharField" name="name">Лиценизя на алкоголь</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/sources.zip</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">1</field>
+  </object>
+  <object pk="4" model="att_tech_app.document">
+    <field type="CharField" name="name">picture 1</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">1</field>
+  </object>
+  <object pk="5" model="att_tech_app.document">
+    <field type="CharField" name="name">Тхык</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">1</field>
+  </object>
+  <object pk="6" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейты</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">1</field>
+  </object>
+  <object pk="7" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">1</field>
+  </object>
+  <object pk="8" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">1</field>
+  </object>
+  <object pk="11" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="12" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="13" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">4</field>
+  </object>
+  <object pk="14" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">4</field>
+  </object>
+  <object pk="15" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">5</field>
+  </object>
+  <object pk="16" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">5</field>
+  </object>
+  <object pk="17" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">6</field>
+  </object>
+  <object pk="18" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">6</field>
+  </object>
+  <object pk="19" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">7</field>
+  </object>
+  <object pk="20" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">7</field>
+  </object>
+  <object pk="21" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата 2</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">7</field>
+  </object>
+  <object pk="22" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">8</field>
+  </object>
+  <object pk="23" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">8</field>
+  </object>
+  <object pk="24" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">9</field>
+  </object>
+  <object pk="25" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">9</field>
+  </object>
+  <object pk="26" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата 2</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">9</field>
+  </object>
+  <object pk="27" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">10</field>
+  </object>
+  <object pk="28" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">10</field>
+  </object>
+  <object pk="29" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата 2</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">10</field>
+  </object>
+  <object pk="47" model="att_tech_app.document">
+    <field type="CharField" name="name">picture 1</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">1</field>
+  </object>
+  <object pk="48" model="att_tech_app.document">
+    <field type="CharField" name="name">Тхык</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">1</field>
+  </object>
+  <object pk="49" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейты</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">1</field>
+  </object>
+  <object pk="51" model="att_tech_app.document">
+    <field type="CharField" name="name">Расписание занятий</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/DDSSYNTH.pdf</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">2</field>
+  </object>
+  <object pk="52" model="att_tech_app.document">
+    <field type="CharField" name="name">Расписание занятий</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/sources.zip</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="53" model="att_tech_app.document">
+    <field type="CharField" name="name">Лицензия на преподавание</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/sources.zip</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">4</field>
+  </object>
+  <object pk="54" model="att_tech_app.document">
+    <field type="CharField" name="name">Разрешение на проведение образовательной работы образовательной работы образовательной работы образовательной работы</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/sources.zip</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">4</field>
+  </object>
+  <object pk="55" model="att_tech_app.document">
+    <field type="CharField" name="name">Лиценизя на алкоголь</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/sources.zip</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">4</field>
+  </object>
+  <object pk="56" model="att_tech_app.document">
+    <field type="CharField" name="name">Расписание занятий</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/sources.zip</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="57" model="att_tech_app.document">
+    <field type="CharField" name="name">Расписание занятий</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/sources.zip</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="58" model="att_tech_app.document">
+    <field type="CharField" name="name">Расписание занятий</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/sources.zip</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="59" model="att_tech_app.document">
+    <field type="CharField" name="name">Зачисление</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/sources.zip</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>articlewithdocuments</natural></field>
+    <field type="PositiveIntegerField" name="object_id">5</field>
+  </object>
+  <object pk="60" model="att_tech_app.document">
+    <field type="CharField" name="name">picture 1</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">2</field>
+  </object>
+  <object pk="61" model="att_tech_app.document">
+    <field type="CharField" name="name">Тхык</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">2</field>
+  </object>
+  <object pk="62" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейты</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">2</field>
+  </object>
+  <object pk="63" model="att_tech_app.document">
+    <field type="CharField" name="name">picture 1</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">2</field>
+  </object>
+  <object pk="64" model="att_tech_app.document">
+    <field type="CharField" name="name">Тхык</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">2</field>
+  </object>
+  <object pk="65" model="att_tech_app.document">
+    <field type="CharField" name="name">picture 1</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="66" model="att_tech_app.document">
+    <field type="CharField" name="name">Тхык</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="67" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейты</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="68" model="att_tech_app.document">
+    <field type="CharField" name="name">picture 1</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>basicarticle</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="75" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="76" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">3</field>
+  </object>
+  <object pk="77" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">4</field>
+  </object>
+  <object pk="78" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">4</field>
+  </object>
+  <object pk="79" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">4</field>
+  </object>
+  <object pk="80" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">4</field>
+  </object>
+  <object pk="81" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">6</field>
+  </object>
+  <object pk="82" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">6</field>
+  </object>
+  <object pk="83" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">7</field>
+  </object>
+  <object pk="84" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">7</field>
+  </object>
+  <object pk="85" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">7</field>
+  </object>
+  <object pk="86" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">7</field>
+  </object>
+  <object pk="87" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">8</field>
+  </object>
+  <object pk="88" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">8</field>
+  </object>
+  <object pk="89" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">8</field>
+  </object>
+  <object pk="90" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">8</field>
+  </object>
+  <object pk="91" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">9</field>
+  </object>
+  <object pk="92" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">9</field>
+  </object>
+  <object pk="93" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">9</field>
+  </object>
+  <object pk="94" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">9</field>
+  </object>
+  <object pk="95" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">9</field>
+  </object>
+  <object pk="96" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">9</field>
+  </object>
+  <object pk="97" model="att_tech_app.document">
+    <field type="CharField" name="name">Плата</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">10</field>
+  </object>
+  <object pk="98" model="att_tech_app.document">
+    <field type="CharField" name="name">Скейтборды, поломатые.</field>
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/3%20copy.jpg</field>
+    <field to="contenttypes.contenttype" name="content_type" rel="ManyToOneRel"><natural>att_tech_app</natural><natural>new</natural></field>
+    <field type="PositiveIntegerField" name="object_id">10</field>
+  </object>
+  <object pk="1" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url"></field>
+  </object>
+  <object pk="2" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url"></field>
+  </object>
+  <object pk="3" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url"></field>
+  </object>
+  <object pk="4" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="5" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n.jpg</field>
+  </object>
+  <object pk="6" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="7" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="8" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="11" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="12" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="13" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="14" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="15" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="16" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="17" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="18" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="19" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="20" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="21" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="22" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="23" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="24" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="25" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="26" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="27" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="28" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="29" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="47" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="48" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n.jpg</field>
+  </object>
+  <object pk="49" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="60" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="61" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n.jpg</field>
+  </object>
+  <object pk="62" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="63" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="64" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n.jpg</field>
+  </object>
+  <object pk="65" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="66" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/550859_408309615874320_550051482_n.jpg</field>
+  </object>
+  <object pk="67" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="68" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="75" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="76" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="77" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="78" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="79" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="80" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="81" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="82" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="83" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="84" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="85" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="86" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="87" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="88" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="89" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="90" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="91" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="92" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="93" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="94" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="95" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="96" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="97" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/2013-02-12%2016.22.26_pr.jpg</field>
+  </object>
+  <object pk="98" model="att_tech_app.picture">
+    <field type="CharField" name="thumbnail_url">https://dl.dropbox.com/u/930819/att_tech/3.jpg</field>
+  </object>
+  <object pk="0" model="att_tech_app.newcounter">
+    <field type="PositiveIntegerField" name="news_number">5</field>
+    <field type="PositiveIntegerField" name="events_number">5</field>
+  </object>
+  <object pk="1" model="att_tech_app.indexpicture">
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/bootstrap-mdo-sfmoma-01.jpg</field>
+    <field type="CharField" name="name">Название фото 1</field>
+    <field type="TextField" name="descr">Описание фото 1</field>
+    <field type="SmallIntegerField" name="position">1</field>
+  </object>
+  <object pk="3" model="att_tech_app.indexpicture">
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/bootstrap-mdo-sfmoma-02.jpg</field>
+    <field type="CharField" name="name">Название фото 2</field>
+    <field type="TextField" name="descr">Описание фото 2</field>
+    <field type="SmallIntegerField" name="position">2</field>
+  </object>
+  <object pk="2" model="att_tech_app.indexpicture">
+    <field type="CharField" name="url">https://dl.dropbox.com/u/930819/att_tech/bootstrap-mdo-sfmoma-03.jpg</field>
+    <field type="CharField" name="name">Название фото 3</field>
+    <field type="TextField" name="descr">Описание фото 3</field>
+    <field type="SmallIntegerField" name="position">3</field>
+  </object>
+  <object pk="3" model="att_tech_app.indextextblock">
+    <field type="CharField" name="title">Шаг в будущее</field>
+    <field type="TextField" name="text">По словам ИТ-директора, без собственных дата-центров не обойтись. Авиакомпаниям нужно готовиться также к увеличению потоков прочей информации, например, пассажирский багаж начинают автоматически обрабатывать с использованием радиометок RFID.</field>
+    <field type="SmallIntegerField" name="position">0</field>
+  </object>
+  <object pk="2" model="att_tech_app.indextextblock">
+    <field type="CharField" name="title">Статистика</field>
+    <field type="TextField" name="text">Из-за того, что самолёт генерирует столь большие объёмы данных, авиакомпаниям приходится искать технические ресурсы для её обработки. Так, авиакомпания Virgin Atlantic планирует организовать свой собственный дата-центр («частное облако»), а также арендовать публичные сервисы.</field>
+    <field type="SmallIntegerField" name="position">1</field>
+  </object>
+  <object pk="1" model="att_tech_app.indextextblock">
+    <field type="CharField" name="title">Традиции</field>
+    <field type="TextField" name="text">Boeing 787 Dreamliner — авиалайнер нового поколения, который должен заменить на рынке старый «Боинг-767». На данный момент построено 49 экземпляров, розничная цена каждого лайнера составляет от 206 до 244 миллиона долларов, в зависимости от модификации.</field>
+    <field type="SmallIntegerField" name="position">2</field>
+  </object>
+</django-objects>
