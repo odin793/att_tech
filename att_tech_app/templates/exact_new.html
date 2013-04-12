@@ -19,7 +19,7 @@
 			</div>
 
 			<p> {{ new.full_text|safe }} </p>
-			<p> {{ new.date_added }}</p>
+			<p class="badge badge-info" style="margin-top: 10px;"><i>{{ new.date_added }}</i></p>
 		
 		
 
@@ -28,7 +28,7 @@
 					<div class="clearfix">&nbsp;</div>
 			</div>
 
-			
+			{% if files_list %}
 				<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" class="well">
 					{% for 6_photos in files_list %}
 						<div class="row-fluid" style="margin-left: -3px; margin-bottom: 5px;">
@@ -42,7 +42,8 @@
 						</div>
 					{% endfor %}
 				</div>
-		
+			{% endif %}
+			
 <!-- modal-gallery is the modal dialog used for the image gallery -->
 				<div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
 			    	<div class="modal-header">
