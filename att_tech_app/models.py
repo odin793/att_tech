@@ -7,6 +7,13 @@ from tinymce import models as tinymce_models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
+
+__all__ = (
+    'BasicArticle', 'ArticleWithDocuments', 'New', 'Profession',
+    'Person', 'Discipline', 'DisciplineType', 'Picture', 'Document',
+    'NewCounter', 'IndexPicture', 'IndexTextBlock', 'Contacts',
+)
+
 BASIC_ARTICLE_LOCATION_CHOICES = (
     ('about_tech', u'О техникуме'),
     ('tuition_by_correspondence', u'Заочное отделение'),

@@ -14,7 +14,6 @@ def copy_object(queryset):
         art_copy.save()
 
         for f in art.files_list.all():
-            print f
             f_copy = Document(
                 content_object = art_copy,
                 name = f.name,
@@ -49,7 +48,6 @@ class BasicArticleAdmin(admin.ModelAdmin):
             art_copy.save()
         
             for f in art.files_list.all():
-                print f
                 f_copy = Picture(
                     content_object = art_copy,
                     name = f.name,
@@ -81,8 +79,6 @@ class NewAdmin(admin.ModelAdmin):
     
     def copy_new(self, request, queryset):
         for new in queryset:
-            print new
-            print new.pictures_list.all()
             n = New(
                 title = new.title,
                 short_text = new.short_text,
@@ -94,7 +90,6 @@ class NewAdmin(admin.ModelAdmin):
             n.save()
             
             for ph in new.pictures_list.all():
-                print ph
                 p = Picture(
                     content_object = n,
                     name = ph.name,

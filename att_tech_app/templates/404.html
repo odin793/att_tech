@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% load att_tech_app_tags %}
+
+{% block title %} Страница не найдена {% endblock %}
+
+{% block content %}
+	<div class="row-fluid" style="margin: 0 auto;">
+		<div class="span9" style="padding-right: 40px;">
+
+			<div class="alert alert-error text-center" style="padding: 8px 14px;">
+				<h4 style="margin: 8px 0">Запрашиваемая страница не найдена</h4>
+			</div>
+		</div>
+		{% news_block %}
+	</div>
+
+{% endblock %}

@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
-from att_tech_app.views import *
+from att_tech_app.views import basic_page_view, page_with_docs_view, \
+    employees_page, masters_page, news_page, exact_new, contacts_page, \
+    profs_and_specs_page, index_page
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -35,7 +37,6 @@ urlpatterns = patterns('',
     url(r'^contacts/$', contacts_page, name="contacts"),
     url(r'^news/(news)/$', news_page, name="news_page"),
     url(r'^news/(news)/(\w+)/$', exact_new, name="exact_new"),
-    #url(r'^about_tech/$', about_tech, name="about_tech_url"),
     (r'^tinymce/', include('tinymce.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
