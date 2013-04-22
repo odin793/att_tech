@@ -100,8 +100,10 @@ class Person(models.Model):
     contacts = models.CharField(u'Контактный телефон', max_length=50,
         blank=True, null=True)
     master_status = models.BooleanField(u'Управляющий ?', default = False)
+    sort = models.IntegerField(u'Порядок следования')
     
     class Meta:
+        ordering = ['sort',]
         verbose_name = u'Сотрудник'
         verbose_name_plural = u'сотрудники'
     
