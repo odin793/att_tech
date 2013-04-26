@@ -15,7 +15,22 @@
 }
 
 .header {
-    background: url('bg_texture.png') 0 0 repeat;
+    /*background: url('bg_texture.png') 0 0 repeat;*/
+    /*background: linear-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;
+    background: -webkit-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;
+    background: -webkit-linear-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;
+    background: -o-linear-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;
+    background: -ms-linear-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;
+    background: -moz-linear-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;*/
+    /*background: linear-gradient(45deg, #020031 0%, #6D3353 100%) repeat scroll 0 0 transparent;*/
+    /*background-image: url("http://twitter.github.io/bootstrap/assets/css/../img/bs-docs-masthead-pattern.png") repeat scroll center center transparent;*/
+    
+    background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
+    background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), -o-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
+    background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), -moz-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
+    /*background-image: url("https://dl.dropboxusercontent.com/u/930819/att_tech/50%20x%2087/Geometric-Pattern-1--Pink.png"), -moz-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);*/
+    background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), -webkit-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
+    background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), -ms-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
     padding: 30px 20px 20px 20px;
     webkit-border-top-left-radius: 10px;
     -webkit-border-top-right-radius: 10px;
@@ -26,9 +41,22 @@
     margin: 0 auto;
     width: 1160px;
     height: 125px;
-    border: 1px solid #f0f0f0;
+    /*border: 1px solid #f0f0f0;*/
     border-bottom: 0;
 }
+/*
+.header:after {
+    background: url("http://twitter.github.io/bootstrap/assets/css/../img/bs-docs-masthead-pattern.png") repeat scroll center center transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 0;
+    opacity: 0.4;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+*/
 
 .well {
     /*background: url('grey.png') 0 0 repeat;*/
@@ -126,4 +154,65 @@ div #indexCarousel {
 .gap_link:hover {
     text-decoration: none;
     cursor: default;
+}
+
+
+/* navigation menu customization */
+
+.nav-pills .open .dropdown-toggle {
+    background-color: #0088CC;
+    border-color: #0088CC;
+    color: #FFFFFF;
+}
+
+.nav-pills .active a, .nav-pills .active a:hover, .nav-pills .active a:focus {
+    /*background-color: #C9A74D;*/
+    background-color: #0088CC;
+    color: #FFFFFF;
+}
+
+.nav-pills .dropdown .dropdown-menu a {
+    background-color: white;
+    color: black;    
+}
+
+.nav-pills li.dropdown.open.active a:hover, .nav-pills li.dropdown.open.active a:focus {
+    background-color: #0088CC;
+    color: white;
+}
+
+.nav-pills .dropdown .dropdown-menu a {
+    background-color: white;
+    color: black;
+}
+
+.nav-pills .dropdown .dropdown-menu a:focus, .nav-pills .dropdown .dropdown-menu a:hover {
+    background-color: #0088CC;
+    color: white;
+    /*background-image: linear-gradient(bottom, #C9A74D, rgb(194, 159, 67));
+    background-image: -moz-linear-gradient(bottom, #C9A74D, rgb(194, 159, 67));*/
+}
+
+.nav-pills li a:focus, .nav-pills li a:hover {
+    background: #0088CC;
+    color: white;
+}
+
+.nav-pills a, .nav-pills a {
+    color: white;
+}
+
+.nav-pills .dropdown a .caret, .nav-pills .dropdown a:hover .caret {
+    color: white;
+    border-bottom-color: white;
+    border-top-color: white;
+}
+
+.nav a {
+    /*font-weight: bold;*/
+    font-size: 15px;
+}
+
+.nav-pills {
+    margin-right: 5px;
 }
