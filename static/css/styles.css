@@ -41,22 +41,9 @@
     margin: 0 auto;
     width: 1160px;
     height: 125px;
-    /*border: 1px solid #f0f0f0;*/
+
     border-bottom: 0;
 }
-/*
-.header:after {
-    background: url("http://twitter.github.io/bootstrap/assets/css/../img/bs-docs-masthead-pattern.png") repeat scroll center center transparent;
-    bottom: 0;
-    content: "";
-    display: block;
-    left: 0;
-    opacity: 0.4;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-*/
 
 .well {
     /*background: url('grey.png') 0 0 repeat;*/
@@ -70,10 +57,6 @@
     line-height: 40px;
     margin-bottom: 45px;
     margin-top: 3px;
-}
-
-.nav-pills {
-    margin-right: 35px;
 }
 
 div #indexCarousel {
@@ -209,10 +192,25 @@ div #indexCarousel {
 }
 
 .nav a {
-    /*font-weight: bold;*/
     font-size: 15px;
 }
 
 .nav-pills {
-    margin-right: 5px;
+    margin-right: 0px;
+    margin-top: -2px;
+}
+
+blockquote.pull-right {
+    color: #a79900;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border-color: #A79900;
+    padding: 20px;
+    width: 850px;
+    margin-right: -10px;
+}
+
+blockquote p.lead {
+    font-size: 24px; font-style:italic;
 }
