@@ -90,7 +90,7 @@ div #indexCarousel {
 }
 
 .index_news p {
-    text-align: justify;
+    font-size: 16px;
 }
 
 .index_news a.btn {
