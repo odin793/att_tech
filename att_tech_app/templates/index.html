@@ -8,7 +8,7 @@
 	   	Употреби труд, храни умеренность: богат будешь.</p>
 	<p class="lead">
 		Воздержено пей, мало ешь: здрав будешь.</p>
-	<p class="lead">
+	<p class="lead last">
 		Твори благо, не делай зла: спасен будешь.</p>
 	</p>
 	<small style="font-size: 16px;">Девиз рода Живаго</small>
@@ -37,7 +37,7 @@
 					<img src="{{ p.url }}" alt="{{ p.name }}">
 					<div class="carousel-caption">
           	<h4>{{ p.name }}</h4>
-						<p>{{ p.descr }}</p>
+						{% comment %}}<p>{{ p.descr }}</p>{% endcomment %}
           </div>
 				</div>
 			{% endfor %}

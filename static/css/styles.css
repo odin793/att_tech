@@ -14,17 +14,7 @@
     border-bottom-left-radius: 10px; 
 }
 
-.header {
-    /*background: url('bg_texture.png') 0 0 repeat;*/
-    /*background: linear-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;
-    background: -webkit-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;
-    background: -webkit-linear-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;
-    background: -o-linear-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;
-    background: -ms-linear-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;
-    background: -moz-linear-gradient(45deg, #020031 0%, #6D3353 90%) repeat scroll 0 0 transparent;*/
-    /*background: linear-gradient(45deg, #020031 0%, #6D3353 100%) repeat scroll 0 0 transparent;*/
-    /*background-image: url("http://twitter.github.io/bootstrap/assets/css/../img/bs-docs-masthead-pattern.png") repeat scroll center center transparent;*/
-    
+.header {    
     background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
     background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), -o-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
     background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), -moz-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
@@ -181,7 +171,7 @@ div #indexCarousel {
     color: white;
 }
 
-.nav-pills a, .nav-pills a {
+.nav-pills a {
     color: white;
 }
 
@@ -206,11 +196,17 @@ blockquote.pull-right {
     -moz-border-radius: 4px;
     border-radius: 4px;
     border-color: #A79900;
-    padding: 20px;
+    padding: 15px;
     width: 850px;
     margin-right: -10px;
 }
 
 blockquote p.lead {
-    font-size: 24px; font-style:italic;
+    font-size: 21px;
+    font-style:italic;
+    margin-bottom: 10px;
+}
+
+blockquote p.lead.last {
+    margin-bottom: 20px;
 }
