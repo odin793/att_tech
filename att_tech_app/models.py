@@ -70,7 +70,7 @@ class New(models.Model):
     is_event = models.BooleanField(u'Событие студ. жизни ?', default = False)
     
     class Meta:
-        ordering = ['date_added']
+        ordering = ['-date_added']
         verbose_name = u'Новость/Событие'
         verbose_name_plural = u'новости/события'
     
