@@ -15,12 +15,12 @@
 }
 
 .header {    
-    background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
-    background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), -o-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
-    background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), -moz-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
+    background-image: linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
+    background-image: -o-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
+    background-image: -moz-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
     /*background-image: url("https://dl.dropboxusercontent.com/u/930819/att_tech/50%20x%2087/Geometric-Pattern-1--Pink.png"), -moz-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);*/
-    background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), -webkit-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
-    background-image: url("http://twitter.github.io/bootstrap/assets/img/bs-docs-masthead-pattern.png"), -ms-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
+    background-image: -webkit-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
+    background-image: -ms-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
     padding: 30px 20px 20px 20px;
     webkit-border-top-left-radius: 10px;
     -webkit-border-top-right-radius: 10px;
