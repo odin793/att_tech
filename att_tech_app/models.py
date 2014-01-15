@@ -42,6 +42,13 @@ ARTICLE_WITH_DOCUMENTS_LOCATION_CHOICES = (
     ('acceptance', u'Зачисление'),
     ('docs_samples', u'Образцы документов'),
     ('constituent_docs', u'Учредительные документы'),
+    ('employees_vacancies', u'Вакансии для сотрудников'),
+    ('standards_programs', u'Стандарты, учебные планы, программы'),
+    ('contingent', u'Контингент'),
+    ('contingent_vacancies', u'Вакансии по контингенту'),
+    ('comission', u'Приемная комиссия'),
+    ('normative_docs', u'Нормативные документы'),
+    ('grants', u'Награды, сертификаты, поощрения'),
 )
 
 class ArticleWithDocuments(models.Model):
