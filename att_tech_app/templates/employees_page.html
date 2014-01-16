@@ -20,6 +20,9 @@
 			</div>
 
 			<div>
+				<div style="margin-bottom: 40px; font-size: 16px;">
+					{{ employees_info_block|safe }}
+				</div>
 				<ul class="nav nav-tabs" id="employeeTabs">
 					{% for d_type in discipline_types %}
 					{% if forloop.first %}

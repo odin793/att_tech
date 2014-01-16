@@ -134,6 +134,9 @@ class IndexTextBlockAdmin(admin.ModelAdmin):
     list_editable = ('position',)
 
 
+class EmployeesInfoBlockAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(BasicArticle, BasicArticleAdmin)
 admin.site.register(ArticleWithDocuments, ArticleWithDocumentsAdmin)
 admin.site.register(Document, DocumentAdmin)
@@ -146,3 +149,4 @@ admin.site.register(Contacts, ContactsAdmin)
 admin.site.register(NewCounter, NewCounterAdmin)
 admin.site.register(IndexPicture, IndexPictureAdmin)
 admin.site.register(IndexTextBlock, IndexTextBlockAdmin)
+admin.site.register(EmployeesInfoBlock, EmployeesInfoBlockAdmin)

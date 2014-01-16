@@ -12,6 +12,7 @@ __all__ = (
     'BasicArticle', 'ArticleWithDocuments', 'New', 'Profession',
     'Person', 'Discipline', 'DisciplineType', 'Picture', 'Document',
     'NewCounter', 'IndexPicture', 'IndexTextBlock', 'Contacts',
+    'EmployeesInfoBlock',
 )
 
 BASIC_ARTICLE_LOCATION_CHOICES = (
@@ -42,6 +43,13 @@ ARTICLE_WITH_DOCUMENTS_LOCATION_CHOICES = (
     ('acceptance', u'Зачисление'),
     ('docs_samples', u'Образцы документов'),
     ('constituent_docs', u'Учредительные документы'),
+    ('employees_vacancies', u'Вакансии для сотрудников'),
+    ('standards_programs', u'Стандарты, учебные планы, программы'),
+    ('contingent', u'Контингент'),
+    ('contingent_vacancies', u'Вакансии по контингенту'),
+    ('comission', u'Приемная комиссия'),
+    ('normative_docs', u'Нормативные документы'),
+    ('grants', u'Награды, сертификаты, поощрения'),
 )
 
 class ArticleWithDocuments(models.Model):
@@ -145,6 +153,17 @@ class Contacts(models.Model):
     
     def __unicode__(self):
         return u'Контакты'
+
+
+class EmployeesInfoBlock(models.Model):
+    text = tinymce_models.HTMLField(u'Описание')
+
+    class Meta:
+        verbose_name = u'Блок информации по преподавателям'
+        verbose_name_plural = u'блок информации по преподавателям'
+    
+    def __unicode__(self):
+        return u'Блок информация по преподавателям'
 
 
 
