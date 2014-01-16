@@ -12,6 +12,7 @@ __all__ = (
     'BasicArticle', 'ArticleWithDocuments', 'New', 'Profession',
     'Person', 'Discipline', 'DisciplineType', 'Picture', 'Document',
     'NewCounter', 'IndexPicture', 'IndexTextBlock', 'Contacts',
+    'EmployeesInfoBlock',
 )
 
 BASIC_ARTICLE_LOCATION_CHOICES = (
@@ -152,6 +153,17 @@ class Contacts(models.Model):
     
     def __unicode__(self):
         return u'Контакты'
+
+
+class EmployeesInfoBlock(models.Model):
+    text = tinymce_models.HTMLField(u'Описание')
+
+    class Meta:
+        verbose_name = u'Блок информации по преподавателям'
+        verbose_name_plural = u'блок информации по преподавателям'
+    
+    def __unicode__(self):
+        return u'Блок информация по преподавателям'
 
 
 

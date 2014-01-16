@@ -14,7 +14,7 @@
   </head>
   <body>
 		<div class="layout_wrap">
-					<div class="header" style="position: relative;">
+					<div class="header" style="position: relative; border-bottom-right-radius: 4px">
 						<ul class="nav nav-pills pull-right">
 							<li class="dropdown menu-0">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -73,19 +73,20 @@
 							<p style="color: white; font-size: 21px; font-weight: bold;">Г. РЯЗАНИ"</p>
 						</div>{% endcomment %}
 						
-						{% comment %}<span style="color: white; font-size: 20px; margin-left: 150px; width: 450px">ОГБОУ СПО "Автотранспортный техникум им С.А. Живаго" г. Рязани</span><br>{% endcomment %}
+						{% comment %}<span style="color: white; font-size: 20px; margin-left: 150px; width: 450px;">ОГБОУ СПО "Автотранспортный техникум им С.А. Живаго" г. Рязани</span><br>{% endcomment %}
 						<img src="{{STATIC_URL}}img/logo.png" style="position: absolute; left: 20px; top: 25px"/>
 						</a>
+					<a href="http://минобрнауки.рф" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 0;">минобрнауки.рф</a>
 					</div>
 
 			<div class="layout">
-
 				<div class="main_wrap">
 					<div class="content">
 						<div class="content_wrap">
 							{% block content %} {% endblock %}
 						</div>
 					</div>
+				{% block banner %}{% endblock %}			
 				</div>	
 			</div>
 		</div>

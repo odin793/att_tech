@@ -51,9 +51,11 @@ def employees_page(request):
     for d_type in discipline_types:
         employees_lists.append(set([d.tutor for d in 
         Discipline.objects.filter(discipline_type__discipline_type=d_type)]))
+    employees_info_block = EmployeesInfoBlock.objects.all()[0].text
     return {
         'discipline_types': discipline_types,
         'employees_lists': employees_lists,
+        'employees_info_block': employees_info_block,
     }
     
     
