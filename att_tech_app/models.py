@@ -7,6 +7,14 @@ from tinymce import models as tinymce_models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
+
+__all__ = (
+    'BasicArticle', 'ArticleWithDocuments', 'New', 'Profession',
+    'Person', 'Discipline', 'DisciplineType', 'Picture', 'Document',
+    'NewCounter', 'IndexPicture', 'IndexTextBlock', 'Contacts',
+    'EmployeesInfoBlock',
+)
+
 BASIC_ARTICLE_LOCATION_CHOICES = (
     ('about_tech', u'О техникуме'),
     ('tuition_by_correspondence', u'Заочное отделение'),
@@ -35,6 +43,13 @@ ARTICLE_WITH_DOCUMENTS_LOCATION_CHOICES = (
     ('acceptance', u'Зачисление'),
     ('docs_samples', u'Образцы документов'),
     ('constituent_docs', u'Учредительные документы'),
+    ('employees_vacancies', u'Вакансии для сотрудников'),
+    ('standards_programs', u'Стандарты, учебные планы, программы'),
+    ('contingent', u'Контингент'),
+    ('contingent_vacancies', u'Вакансии по контингенту'),
+    ('comission', u'Приемная комиссия'),
+    ('normative_docs', u'Нормативные документы'),
+    ('grants', u'Награды, сертификаты, поощрения'),
 )
 
 class ArticleWithDocuments(models.Model):
@@ -63,7 +78,7 @@ class New(models.Model):
     is_event = models.BooleanField(u'Событие студ. жизни ?', default = False)
     
     class Meta:
-        ordering = ['date_added']
+        ordering = ['-date_added']
         verbose_name = u'Новость/Событие'
         verbose_name_plural = u'новости/события'
     
@@ -93,8 +108,10 @@ class Person(models.Model):
     contacts = models.CharField(u'Контактный телефон', max_length=50,
         blank=True, null=True)
     master_status = models.BooleanField(u'Управляющий ?', default = False)
+    sort = models.IntegerField(u'Порядок следования')
     
     class Meta:
+        ordering = ['sort',]
         verbose_name = u'Сотрудник'
         verbose_name_plural = u'сотрудники'
     
@@ -136,6 +153,17 @@ class Contacts(models.Model):
     
     def __unicode__(self):
         return u'Контакты'
+
+
+class EmployeesInfoBlock(models.Model):
+    text = tinymce_models.HTMLField(u'Описание')
+
+    class Meta:
+        verbose_name = u'Блок информации по преподавателям'
+        verbose_name_plural = u'блок информации по преподавателям'
+    
+    def __unicode__(self):
+        return u'Блок информация по преподавателям'
 
 
 

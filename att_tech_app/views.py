@@ -4,6 +4,7 @@
 from annoying.decorators import render_to
 from att_tech_app.models import *
 import math
+from django.shortcuts import get_object_or_404
 
 def organize_in_lists(obj_list, l):    # return list of lists of l objects
     result = []
@@ -50,9 +51,11 @@ def employees_page(request):
     for d_type in discipline_types:
         employees_lists.append(set([d.tutor for d in 
         Discipline.objects.filter(discipline_type__discipline_type=d_type)]))
+    employees_info_block = EmployeesInfoBlock.objects.all()[0].text
     return {
         'discipline_types': discipline_types,
         'employees_lists': employees_lists,
+        'employees_info_block': employees_info_block,
     }
     
     
@@ -77,7 +80,7 @@ def profs_and_specs_page(request):
 @render_to('contacts_page.html')
 def contacts_page(request):
     contacts = Contacts.objects.all()[0].contacts
-    return locals()
+    return {'contacts': contacts,}
 
 
 def paginate(cur_page, N):
@@ -110,7 +113,7 @@ def paginate(cur_page, N):
 
 @render_to('news_page.html')
 def news_page(request, page_type):
-    news_per_page = 3
+    news_per_page = 8
     try:
         # if someone trying to hack, page arg can be anytings,
         # so limit it to length 10. enough for page number
@@ -141,8 +144,8 @@ def news_page(request, page_type):
 
 @render_to('exact_new.html')
 def exact_new(request, page_type, new_id):
-    new = New.objects.get(id=int(new_id))
-    pictures_list = list(new.pictures_list.all()) * 3
+    new = get_object_or_404(New, pk=int(new_id))
+    pictures_list = list(new.pictures_list.all())
     files_list = organize_in_lists(pictures_list, 6)
     return {
         'new': new,
