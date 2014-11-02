@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
+
 from django import template
-from django.conf import settings
-from att_tech_app.models import New 
+
+from att_tech_app.models import New
+
 
 register = template.Library()
+
 
 @register.inclusion_tag('news_block_template.html')
 def news_block():
