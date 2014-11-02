@@ -1,111 +1,157 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>{% block title %} {% endblock %}</title>
-		<meta charset="utf-8">
-		<link href="{{ STATIC_URL }}img/favicon.ico" rel="shortcut icon">
+    <meta charset="utf-8">
+    <link href="{{ STATIC_URL }}img/favicon.ico" rel="shortcut icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Автотранспортный техникум имени С.А. Живаго г. Рязани" name="description">
-		<meta content="автотранспортный техникум имени живаго, автотранспортный техникум, техникум живаго, техникум рязани" name="keywords">
-		<!-- Bootstrap -->
-		<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-		<link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet" media="screen">
-		{% block extrahead %} {% endblock %}
+    <meta content="автотранспортный техникум имени живаго, автотранспортный техникум, техникум живаго, техникум рязани" name="keywords">
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet" media="screen">
+    {% block extrahead %} {% endblock %}
   </head>
+
   <body>
-		<div class="layout_wrap">
-					<div class="header" style="position: relative; border-bottom-right-radius: 4px">
-						<ul class="nav nav-pills pull-right">
-							<li class="dropdown menu-0">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									О техникуме
-									<b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a href="{% url about_tech 'about_tech' %}">О техникуме</a></li>
-									<li><a href="{% url structure 'structure' %}">Структура</a></li>
-									<li><a href="{% url constituent_docs 'constituent_docs'%}">Учредительные документы</a></li>
-									<li><a href="{% url normative_docs 'normative_docs'%}">Нормативные документы</a></li>
-									<li><a href="{% url masters_page %}">Администрация</a></li>
-									<li><a href="{% url employees_page %}">Сотрудники</a></li>
-									<li><a href="{% url employees_vacancies 'employees_vacancies' %}">Вакансии для сотрудников</a></li>
-									<li><a href="{% url standards_programs 'standards_programs' %}">Стандарты, учебные планы, программы</a></li>
-									<li><a href="{% url grants 'grants' %}">Награды, сертификаты, поощрения</a></li>
-								</ul>
-							</li>
-							<li class="dropdown menu-1">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									Абитуриентам
-									<b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a href="{% url profs_and_specs %}">Специальности и профессии</a></li>
-									<li><a href="{% url tuition_by_correspondence 'tuition_by_correspondence' %}">Заочное отделение</a></li>
-									<li><a href="{% url courses 'courses' %}">Подготовительные курсы</a></li>
-									<li><a href="{% url acceptance_rules 'acceptance_rules' %}">Правила приема</a></li>
-									<li><a href="{% url comission 'comission' %}">Приемная комиссия</a></li>
-									<li><a href="{% url docs_samples 'docs_samples' %}">Образцы документов</a></li>
-									<li><a href="{% url acceptance 'acceptance' %}">Зачисление</a></li>
-								</ul>
-							</li>
+    <div class="layout_wrap">
+      <div class="header" style="position: relative; border-bottom-right-radius: 4px">
+        <ul class="nav nav-pills pull-right">
 
-							<li class="dropdown menu-2">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									Обучающимся
-									<b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a href="{% url schedule 'schedule' %}">Расписание</a></li>
-									<li><a href="{% url stud_life_page 'stud_life' %}">Студенческая жизнь</a></li>
-									<li><a href="{% url contingent 'contingent' %}">Контингент</a></li>
-									<li><a href="{% url contingent_vacancies 'contingent_vacancies' %}">Вакансии по контингенту</a></li>
-								</ul>
-							</li>
+          <li class="dropdown menu-0">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span>Сведения об<br>образовательной организации</span>
+              <span>
+                <b style="margin-top: -1px;" class="caret"></b>
+              </span>
 
-							<li class="menu-3"><a href="{% url news_page 'news' %}">Новости</a></li>
-							<li class="menu-4"><a href="{% url contacts %}">Контакты</a></li>
-						</ul>
-						<a href="/">
-<img src="{{STATIC_URL}}img/ls1.png" style="position: absolute; left: 170px; top: 50px" />
-						{% comment %}<div style="position: absolute; left: 185px; top: 50px;">
-							<p style="color: white; font-size: 21px; font-weight: bold;">ОГБОУ СПО "АВТОТРАНСПОРТНЫЙ</p>
-							<p style="color: white; font-size: 21px; font-weight: bold;"> ТЕХНИКУМ ИМ. С.А. ЖИВАГО</p>
-							<p style="color: white; font-size: 21px; font-weight: bold;">Г. РЯЗАНИ"</p>
-						</div>{% endcomment %}
-						
-						{% comment %}<span style="color: white; font-size: 20px; margin-left: 150px; width: 450px;">ОГБОУ СПО "Автотранспортный техникум им С.А. Живаго" г. Рязани</span><br>{% endcomment %}
-						<img src="{{STATIC_URL}}img/logo.png" style="position: absolute; left: 20px; top: 25px"/>
-						</a>
-					<a href="http://минобрнауки.рф" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 0;">минобрнауки.рф</a>
-					</div>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{% url about_tech 'about_tech' %}">
+                  Основные сведения
+                </a>
+              </li>
+              <li>
+                <a href="{% url structure 'structure' %}">
+                  Структура и органы управления<br> образовательной организацией
+                </a>
+              </li>
+              <li>
+                <a href="{% url constituent_docs 'constituent_docs'%}">Документы</a>
+              </li>
+              <li><a href="{% url normative_docs 'normative_docs'%}">Образование</a></li>
+              <li><a href="{% url masters_page %}">Администрация</a></li>
+              <li><a href="{% url employees_page %}">Сотрудники</a></li>
+              <li>
+                <a href="{% url employees_vacancies 'employees_vacancies' %}">
+                  Вакансии для сотрудников
+                </a>
+              </li>
+              <li>
+                <a href="{% url standards_programs 'standards_programs' %}">
+                  Стандарты, учебные планы, программы
+                </a>
+              </li>
+              <li><a href="{% url grants 'grants' %}">Награды, сертификаты, поощрения</a></li>
+            </ul>
+          </li>
 
-			<div class="layout">
-				<div class="main_wrap">
-					<div class="content">
-						<div class="content_wrap">
-							{% block content %} {% endblock %}
-						</div>
-					</div>
-				{% block banner %}{% endblock %}			
-				</div>	
-			</div>
-		</div>
-		<script src="http://code.jquery.com/jquery.js"></script>
+          <li class="dropdown menu-1">
+            <a href="#" class="dropdown-toggle two_line" data-toggle="dropdown">
+              <span>Абитуриентам</span>
+              <span>
+                <b style="margin-top: 13px" class="caret"></b>
+              </span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url profs_and_specs %}">Специальности и профессии</a></li>
+              <li>
+                <a href="{% url tuition_by_correspondence 'tuition_by_correspondence' %}">
+                  Заочное отделение
+                </a>
+              </li>
+              <li><a href="{% url courses 'courses' %}">Подготовительные курсы</a></li>
+              <li><a href="{% url acceptance_rules 'acceptance_rules' %}">Правила приема</a></li>
+              <li><a href="{% url comission 'comission' %}">Приемная комиссия</a></li>
+              <li><a href="{% url docs_samples 'docs_samples' %}">Образцы документов</a></li>
+              <li><a href="{% url acceptance 'acceptance' %}">Зачисление</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown menu-2">
+            <a href="#" class="dropdown-toggle two_line" data-toggle="dropdown">
+              <span>Обучающимся</span>
+              <span
+                <b style="margin-top: 13px" class="caret"></b>
+              </span>
+
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url schedule 'schedule' %}">Расписание</a></li>
+              <li><a href="{% url stud_life_page 'stud_life' %}">Студенческая жизнь</a></li>
+              <li><a href="{% url contingent 'contingent' %}">Контингент</a></li>
+              <li><a href="{% url contingent_vacancies 'contingent_vacancies' %}">Вакансии по контингенту</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-3">
+            <a class="two_line" href="{% url news_page 'news' %}">
+              <span>Новости</span>
+            </a>
+          <li class="menu-4"><a class="two_line" href="{% url contacts %}">Контакты</a></li>
+        </ul>
+        <a href="/">
+          <img src="{{STATIC_URL}}img/ls1.png" class="slogan_img" />
+          {% comment %}
+            <div style="position: absolute; left: 185px; top: 50px;">
+            <p style="color: white; font-size: 21px; font-weight: bold;">ОГБОУ СПО "АВТОТРАНСПОРТНЫЙ</p>
+            <p style="color: white; font-size: 21px; font-weight: bold;"> ТЕХНИКУМ ИМ. С.А. ЖИВАГО</p>
+            <p style="color: white; font-size: 21px; font-weight: bold;">Г. РЯЗАНИ"</p>
+            </div>
+          {% endcomment %}
+
+        {% comment %}
+          <span style="color: white; font-size: 20px; margin-left: 150px; width: 450px;">
+            ОГБОУ СПО "Автотранспортный техникум им С.А. Живаго" г. Рязани
+          </span>
+          <br>
+        {% endcomment %}
+          <img src="{{STATIC_URL}}img/logo.png" style="position: absolute; left: 20px; top: 25px"/>
+        </a>
+        <a href="http://минобрнауки.рф" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 0;">минобрнауки.рф</a>
+      </div>
+
+      <div class="layout">
+        <div class="main_wrap">
+          <div class="content">
+            <div class="content_wrap">
+              {% block content %} {% endblock %}
+            </div>
+          </div>
+        {% block banner %}{% endblock %}
+        </div>
+      </div>
+    </div>
+
+    <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
-		<script>
-			var arr = ['/about_tech', 'matriculants', 'students', 'news', 'contacts'];
-			var url = window.location.toString();
-			var main_page = true;
-			$.each(arr, function(ind, el) {
-				if (url.match(el) !== null) {
-					$('li.menu-' + ind).addClass('active');
-					main_page = false
-				}
-			});
-			if (main_page) {
-				$('li.menu-0').addClass('active');
-			}
-		</script>
-		{% block added_scripts %} {% endblock %}
+    <script>
+      var arr = ['/about_tech', 'matriculants', 'students', 'news', 'contacts'];
+      var url = window.location.toString();
+      var main_page = true;
+      $.each(arr, function(ind, el) {
+        if (url.match(el) !== null) {
+          $('li.menu-' + ind).addClass('active');
+          main_page = false
+        }
+      });
+      if (main_page) {
+        $('li.menu-0').addClass('active');
+      }
+    </script>
+    {% block added_scripts %} {% endblock %}
   </body>
+
 </html>

@@ -11,10 +11,10 @@
     -moz-border-radius-bottomright: 10px;
     -moz-border-radius-bottomleft: 10px;
     border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px; 
+    border-bottom-left-radius: 10px;
 }
 
-.header {    
+.header {
     background-image: linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
     background-image: -o-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
     background-image: -moz-linear-gradient(left bottom, rgb(44,13,56) 0%, rgb(138,50,100) 100%);
@@ -33,6 +33,14 @@
     height: 125px;
 
     border-bottom: 0;
+}
+
+.slogan_img {
+    position: absolute;
+    width: 350px;
+    height: 87px;
+    left: 170px;
+    top: 50px;
 }
 
 .well {
@@ -146,7 +154,7 @@ div #indexCarousel {
 
 .nav-pills .dropdown .dropdown-menu a {
     background-color: white;
-    color: black;    
+    color: black;
 }
 
 .nav-pills li.dropdown.open.active a:hover, .nav-pills li.dropdown.open.active a:focus {
@@ -182,7 +190,15 @@ div #indexCarousel {
 }
 
 .nav a {
-    font-size: 15px;
+    font-size: 13px;
+}
+
+.nav a.two_line {
+    line-height: 28px;
+}
+
+.nav .dropdown a.dropdown-toggle {
+    text-align: center;
 }
 
 .nav-pills {
