@@ -25,7 +25,6 @@
               <span>
                 <b style="margin-top: -1px;" class="caret"></b>
               </span>
-
             </a>
             <ul class="dropdown-menu">
               <li>
@@ -61,13 +60,28 @@
                 </ul>
               <li>
               <li>
-                <a href="{% url employees_vacancies 'employees_vacancies' %}">
-                  Вакансии для сотрудников
+                <a href="{% url material_logistics 'material_logistics' %}">
+                  Материально-техническое<br>обеспечение и оснащенность<br>образовательного процесса
                 </a>
               </li>
               <li>
-                <a href="{% url standards_programs 'standards_programs' %}">
-                  Стандарты, учебные планы, программы
+                <a href="{% url scholarships 'scholarships' %}">
+                  Стипендии и иные виды<br>материальной поддержки
+                </a>
+              </li>
+              <li>
+                <a href="{% url paid_services 'paid_services' %}">
+                  Платные образовательные услуги
+                </a>
+              </li>
+              <li>
+                <a href="{% url finance 'finance' %}">
+                  Финансово-хозяйственная<br>деятельность
+                </a>
+              </li>
+              <li>
+                <a href="{% url employees_vacancies 'employees_vacancies' %}">
+                  Вакантные места для приёма (перевода)
                 </a>
               </li>
               <li><a href="{% url grants 'grants' %}">Награды, сертификаты, поощрения</a></li>
@@ -107,8 +121,6 @@
             <ul class="dropdown-menu">
               <li><a href="{% url schedule 'schedule' %}">Расписание</a></li>
               <li><a href="{% url stud_life_page 'stud_life' %}">Студенческая жизнь</a></li>
-              <li><a href="{% url contingent 'contingent' %}">Контингент</a></li>
-              <li><a href="{% url contingent_vacancies 'contingent_vacancies' %}">Вакансии по контингенту</a></li>
             </ul>
           </li>
 
@@ -136,6 +148,8 @@
         {% endcomment %}
           <img src="{{STATIC_URL}}img/logo.png" style="position: absolute; left: 20px; top: 25px"/>
         </a>
+        <a href="http://www.kremlinrus.ru" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 146px;">kremlinrus.ru</a>
+
         <a href="http://минобрнауки.рф" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 0;">минобрнауки.рф</a>
       </div>
 

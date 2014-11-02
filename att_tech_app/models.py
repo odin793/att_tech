@@ -27,17 +27,21 @@ BASIC_ARTICLE_LOCATION_CHOICES = (
 ARTICLE_WITH_DOCUMENTS_LOCATION_CHOICES = (
     ('schedule', u'Расписание'),
     ('structure', u'Структура'),
+    ('constituent_docs', u'Документы'),  # old name is "Учредительные документы"
+    ('normative_docs', u'Образование'),  # old name is "Нормативные документы"
+    ('educational_standards', u'Образовательные стандарты'),
+    ('material_logistics', u'Материально-техническое обеспечение и оснащенность образовательного процесса'),
+    ('scholarships', u'Стипендии и иные виды материальной поддержки'),
+    ('paid_services', u'Платные образовательные услуги'),
+    ('finance', u'Финансово-хозяйственная деятельность'),
+    ('employees_vacancies', u'Вакантные места для приёма (перевода)'),
+    ('grants', u'Награды, сертификаты, поощрения'),
     ('acceptance', u'Зачисление'),
     ('docs_samples', u'Образцы документов'),
-    ('constituent_docs', u'Документы'),  # old name is "Учредительные документы"
-    ('employees_vacancies', u'Вакансии для сотрудников'),
-    ('standards_programs', u'Стандарты, учебные планы, программы'),
-    ('contingent', u'Контингент'),
-    ('contingent_vacancies', u'Вакансии по контингенту'),
     ('comission', u'Приемная комиссия'),
-    ('normative_docs', u'Образование'),  # old name is "Нормативные документы"
-    ('grants', u'Награды, сертификаты, поощрения'),
-    ('educational_standards', u'Образовательные стандарты'),
+    # ('standards_programs', u'Стандарты, учебные планы, программы'),
+    # ('contingent', u'Контингент'),
+    # ('contingent_vacancies', u'Вакансии по контингенту'),
 )
 
 

@@ -4,19 +4,19 @@
 {% block title %} Администрация техникума {% endblock %}
 
 {% block extrahead %}
-	
+
 {% endblock %}
 
 
-{% block content %}							
+{% block content %}
 
 	<div class="row-fluid" style="margin: 0 auto;">
 		<div class="span9" style="padding-right: 40px;">
 
-			<h2 style="margin: 0 0 20px 0;">Администрация техникума</h2>
+			<h2 style="margin: 0 0 20px 0;">Руководство</h2>
 			<div class="row">
 				<div class="clearfix">&nbsp;</div>
-				<div class="clearfix">&nbsp;</div>				
+				<div class="clearfix">&nbsp;</div>
 			</div>
 
 			<div>
@@ -27,7 +27,7 @@
 							<td class="master_info">
 								<div>
 									<h3 class="lead">{{ master.full_name }}</h3>
-									<div class="row">	
+									<div class="row">
 										<div class="clearfix">&nbsp;</div>
 									</div>
 									<div class="alert alert-info" style="padding: 8px 14px;"><h5>{{ master.position }}</h5></div>
@@ -44,12 +44,12 @@
 					{% endfor %}
 				</table>
 			</div>
-		
+
 		</div>
 		{% news_block %}
-		
+
 	</div>
-{% endblock %}							
+{% endblock %}
 
 
 {% block added_scripts %}

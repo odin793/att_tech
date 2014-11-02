@@ -173,9 +173,9 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_resizing': True,
     'theme_advanced_resizing_min_height': 250,
     'theme_advanced_toolbar_location' : "top",
-    'theme_advanced_toolbar_align': 'left', 
-    'theme_advanced_buttons1' : "bold,italic,strikethrough,bullist,numlist," 
-                            "separator,undo,redo,separator,link,unlink,image," 
+    'theme_advanced_toolbar_align': 'left',
+    'theme_advanced_buttons1' : "bold,italic,strikethrough,bullist,numlist,"
+                            "separator,undo,redo,separator,link,unlink,image,"
                             "separator,cleanup,code,removeformat,charmap,"
                             "fullscreen,paste",
     'theme_advanced_buttons2' : "justifyleft,justifycenter,justifyright,justifyfull",
