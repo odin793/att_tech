@@ -42,8 +42,24 @@
                 <a href="{% url constituent_docs 'constituent_docs'%}">Документы</a>
               </li>
               <li><a href="{% url normative_docs 'normative_docs'%}">Образование</a></li>
-              <li><a href="{% url masters_page %}">Администрация</a></li>
-              <li><a href="{% url employees_page %}">Сотрудники</a></li>
+              <li>
+                <a href="{% url educational_standards 'educational_standards'%}">
+                  Образовательные стандарты
+                </a>
+              </li>
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">
+                  Руководство. Педагогический<br>(научно-педагогический) состав
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url masters_page %}">Руководство</a></li>
+                  <li>
+                    <a href="{% url employees_page %}">
+                      Педагогический (научно-педагогический) состав
+                    </a>
+                  </li>
+                </ul>
+              <li>
               <li>
                 <a href="{% url employees_vacancies 'employees_vacancies' %}">
                   Вакансии для сотрудников

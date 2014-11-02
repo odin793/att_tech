@@ -146,15 +146,16 @@ div #indexCarousel {
     color: #FFFFFF;
 }
 
-.nav-pills .active a, .nav-pills .active a:hover, .nav-pills .active a:focus {
-    /*background-color: #C9A74D;*/
+.nav li.dropdown.open.active a.dropdown-toggle, .nav li.dropdown.open.active a:focus {
     background-color: #0088CC;
+    border-color: #0088CC;
     color: #FFFFFF;
 }
 
-.nav-pills .dropdown .dropdown-menu a {
-    background-color: white;
-    color: black;
+/*.nav-pills .active a, .nav-pills .active a:hover, .nav-pills .active a:focus {
+    # background-color: #C9A74D;
+    background-color: #0088CC;
+    color: #FFFFFF;
 }
 
 .nav-pills li.dropdown.open.active a:hover, .nav-pills li.dropdown.open.active a:focus {
@@ -170,9 +171,10 @@ div #indexCarousel {
 .nav-pills .dropdown .dropdown-menu a:focus, .nav-pills .dropdown .dropdown-menu a:hover {
     background-color: #0088CC;
     color: white;
-    /*background-image: linear-gradient(bottom, #C9A74D, rgb(194, 159, 67));
-    background-image: -moz-linear-gradient(bottom, #C9A74D, rgb(194, 159, 67));*/
+    # background-image: linear-gradient(bottom, #C9A74D, rgb(194, 159, 67));
+    # background-image: -moz-linear-gradient(bottom, #C9A74D, rgb(194, 159, 67));
 }
+*/
 
 .nav-pills li a:focus, .nav-pills li a:hover {
     background: #0088CC;
