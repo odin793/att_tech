@@ -26,7 +26,7 @@ BASIC_ARTICLE_LOCATION_CHOICES = (
 
 ARTICLE_WITH_DOCUMENTS_LOCATION_CHOICES = (
     ('schedule', u'Расписание'),
-    ('structure', u'Структура'),
+    ('structure', u'Структура и органы управления образовательной организацией'),
     ('constituent_docs', u'Документы'),  # old name is "Учредительные документы"
     ('normative_docs', u'Образование'),  # old name is "Нормативные документы"
     ('educational_standards', u'Образовательные стандарты'),
