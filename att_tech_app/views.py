@@ -6,7 +6,8 @@ from att_tech_app.models import *
 import math
 from django.shortcuts import get_object_or_404
 
-def organize_in_lists(obj_list, l):    # return list of lists of l objects
+
+def organize_in_lists(obj_list, l):  # return list of lists of l objects
     result = []
     for i in range(0, len(obj_list), l):
         el = list(obj_list)[i: i+l]  # (0, 1), (2, 3) and so on, for l=2
@@ -45,23 +46,24 @@ def page_with_docs_view(request, location):
 
 @render_to('employees_page.html')
 def employees_page(request):
-    discipline_types = map(lambda obj: obj.discipline_type, 
-                            DisciplineType.objects.all())
-    employees_lists = []
-    for d_type in discipline_types:
-        employees_lists.append(set([d.tutor for d in 
-        Discipline.objects.filter(discipline_type__discipline_type=d_type)]))
+    discipline_types = map(lambda obj: obj.discipline_type,
+                           DisciplineType.objects.all())
+    employees_lists = [
+        set([d.tutor for d in Discipline.objects.filter(
+            discipline_type__discipline_type=d_type)
+        ]) for d_type in discipline_types
+    ]
     employees_info_block = EmployeesInfoBlock.objects.all()[0].text
     return {
         'discipline_types': discipline_types,
         'employees_lists': employees_lists,
         'employees_info_block': employees_info_block,
     }
-    
-    
+
+
 @render_to('masters_page.html')
 def masters_page(request):
-    masters_list =  Person.objects.filter(master_status=True)
+    masters_list = Person.objects.filter(master_status=True)
     return {
         'masters_list': masters_list,
     }
@@ -80,7 +82,7 @@ def profs_and_specs_page(request):
 @render_to('contacts_page.html')
 def contacts_page(request):
     contacts = Contacts.objects.all()[0].contacts
-    return {'contacts': contacts,}
+    return {'contacts': contacts, }
 
 
 def paginate(cur_page, N):
@@ -88,18 +90,22 @@ def paginate(cur_page, N):
     margin = 3
     min_gap = 2
     if N <= 20:
-        return range(1, N + 1) 
+        return range(1, N + 1)
 
     if (cur_page - margin) - (margin + 1) > min_gap:
         # first pages, gap and middle (or last) pages
         pages_list.extend(range(1, (margin + 1) + 1))
         pages_list.append(0)
-        pages_list.extend(range(cur_page-margin, min((cur_page + margin) + 1,
-            N + 1)))
+        pages_list.extend(
+            range(
+                cur_page-margin,
+                min((cur_page + margin) + 1, N + 1)
+            )
+        )
     else:
          # very first pages
         pages_list.extend(range(1, (cur_page + margin) + 1))
-    
+
     if (N - margin) - (cur_page + margin) > min_gap:
         # last pages after gap
         pages_list.append(0)
@@ -107,7 +113,7 @@ def paginate(cur_page, N):
     else:
         # last pages without gap
         pages_list.extend(range(cur_page + margin + 1, N + 1))
-        
+
     return pages_list
 
 
@@ -122,13 +128,13 @@ def news_page(request, page_type):
         cur_page = 1
     if page_type == 'stud_life':
         is_event = True
-        N = int(math.ceil(NewCounter.objects.get(id=0).events_number / 
-            float(news_per_page)))
+        N = NewCounter.objects.get(id=0).events_number / float(news_per_page)
+        N = int(math.ceil(N))
     else:
         is_event = False
-        N = int(math.ceil(NewCounter.objects.get(id=0).news_number /
-            float(news_per_page)))
-    if cur_page > N: # can have db error if cur_page, somehow, is too large
+        N = NewCounter.objects.get(id=0).news_number / float(news_per_page)
+        N = int(math.ceil(N))
+    if cur_page > N:  # can have db error if cur_page, somehow, is too large
         cur_page = N
     obj_list = New.objects.filter(is_event=is_event)
     lower, upper = ((cur_page - 1) * news_per_page, cur_page * news_per_page)
