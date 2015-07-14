@@ -16,12 +16,13 @@ def organize_in_lists(obj_list, l):  # return list of lists of l objects
 
 
 @render_to('index.html')
-def index_page(request):
+def index_page(request, special):
     index_pictures = IndexPicture.objects.all()
     index_text_blocks = IndexTextBlock.objects.all()[0:3]
     return {
         'index_pictures': index_pictures,
         'index_text_blocks': index_text_blocks,
+        'special': special,
     }
 
 
@@ -33,6 +34,7 @@ def basic_page_view(request, special, location):
     return {
         'article': BasicArticle.objects.get(location=location),
         'files_list': files_list,
+        'special': special,
     }
 
 
@@ -41,6 +43,7 @@ def page_with_docs_view(request, special, location):
     article = ArticleWithDocuments.objects.get(location=location)
     return {
         'article': article,
+        'special': special,
     }
 
 
@@ -58,6 +61,7 @@ def employees_page(request, special):
         'discipline_types': discipline_types,
         'employees_lists': employees_lists,
         'employees_info_block': employees_info_block,
+        'special': special,
     }
 
 
@@ -66,6 +70,7 @@ def masters_page(request, special):
     masters_list = Person.objects.filter(master_status=True)
     return {
         'masters_list': masters_list,
+        'special': special,
     }
 
 
@@ -76,13 +81,14 @@ def profs_and_specs_page(request, special):
     return {
         'page_types': [u'Специальности', u'Профессии'],
         'page_items_list': [sp, pr],
+        'special': special,
     }
 
 
 @render_to('contacts_page.html')
 def contacts_page(request, special):
     contacts = Contacts.objects.all()[0].contacts
-    return {'contacts': contacts, }
+    return {'contacts': contacts, 'special': special, }
 
 
 def paginate(cur_page, N):
@@ -145,6 +151,7 @@ def news_page(request, special, page_type):
         'cur_page': cur_page,
         'is_event': is_event,
         'links_list': links_list,
+        'special': special,
     }
 
 
@@ -156,4 +163,5 @@ def exact_new(request, special, page_type, new_id):
     return {
         'new': new,
         'files_list': files_list,
+        'special': special,
     }

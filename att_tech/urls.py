@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'att_tech.views.home', name='home'),
     # url(r'^att_tech/', include('att_tech.foo.urls')),
-    url(r'^$', index_page, name="index_url"),
+    url(r'^(special/)?$', index_page, name="index_url"),
 
     url(r'^(special/)?about_tech/(about_tech)/$', basic_page_view, name="about_tech"),
     url(r'^(special/)?about_tech/(structure)/$', page_with_docs_view, name="structure"),
