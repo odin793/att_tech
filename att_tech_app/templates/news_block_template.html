@@ -4,9 +4,9 @@
 		<div class="news_lent">
 			<div class="news_lent_new">
 				{% if new.is_event %}
-					<a href="{% url exact_stud_life 'stud_life' new.id %}"><h4>{{ new.title }}</h4></a>
+					<a class="special_link" href="{% url exact_stud_life 'stud_life' new.id %}"><h4>{{ new.title }}</h4></a>
 				{% else %}
-					<a href="{% url exact_new 'news' new.id %}"><h4>{{ new.title }}</h4></a>
+					<a class="special_link" href="{% url exact_new 'news' new.id %}"><h4>{{ new.title }}</h4></a>
 				{% endif %}
 				<p>{{ new.short_text|safe }}</p>
 			</div>

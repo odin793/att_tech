@@ -26,7 +26,7 @@ def index_page(request):
 
 
 @render_to('basic_page.html')
-def basic_page_view(request, location):
+def basic_page_view(request, special, location):
     article = BasicArticle.objects.get(location=location)
     pictures_list = list(article.files_list.all())
     files_list = organize_in_lists(pictures_list, 6)
@@ -37,7 +37,7 @@ def basic_page_view(request, location):
 
 
 @render_to('page_with_docs.html')
-def page_with_docs_view(request, location):
+def page_with_docs_view(request, special, location):
     article = ArticleWithDocuments.objects.get(location=location)
     return {
         'article': article,
@@ -45,7 +45,7 @@ def page_with_docs_view(request, location):
 
 
 @render_to('employees_page.html')
-def employees_page(request):
+def employees_page(request, special):
     discipline_types = map(lambda obj: obj.discipline_type,
                            DisciplineType.objects.all())
     employees_lists = [
@@ -62,7 +62,7 @@ def employees_page(request):
 
 
 @render_to('masters_page.html')
-def masters_page(request):
+def masters_page(request, special):
     masters_list = Person.objects.filter(master_status=True)
     return {
         'masters_list': masters_list,
@@ -70,7 +70,7 @@ def masters_page(request):
 
 
 @render_to('profs_and_specs_page.html')
-def profs_and_specs_page(request):
+def profs_and_specs_page(request, special):
     pr = Profession.objects.filter(speciality=False)
     sp = Profession.objects.filter(speciality=True)
     return {
@@ -80,7 +80,7 @@ def profs_and_specs_page(request):
 
 
 @render_to('contacts_page.html')
-def contacts_page(request):
+def contacts_page(request, special):
     contacts = Contacts.objects.all()[0].contacts
     return {'contacts': contacts, }
 
@@ -118,7 +118,7 @@ def paginate(cur_page, N):
 
 
 @render_to('news_page.html')
-def news_page(request, page_type):
+def news_page(request, special, page_type):
     news_per_page = 8
     try:
         # if someone trying to hack, page arg can be anytings,
@@ -149,7 +149,7 @@ def news_page(request, page_type):
 
 
 @render_to('exact_new.html')
-def exact_new(request, page_type, new_id):
+def exact_new(request, special, page_type, new_id):
     new = get_object_or_404(New, pk=int(new_id))
     pictures_list = list(new.pictures_list.all())
     files_list = organize_in_lists(pictures_list, 6)
