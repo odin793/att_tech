@@ -121,6 +121,17 @@
             <ul class="dropdown-menu">
               <!-- <li><a href="{% url schedule 'schedule' %}">Расписание</a></li> -->
               <li><a href="{% url stud_life_page 'stud_life' %}">Студенческое самоуправление</a></li>
+              <li>
+                <a href="{% url students_full_time_tuition_page 'students_full_time_tuition' %}">
+                  Очное обучение
+                </a>
+              </li>
+              <li>
+                <a href="{% url students_tuition_by_correspondence_page 'students_tuition_by_correspondence' %}">
+                  Заочное обучение
+                </a>
+              </li>
+              <li><a href="{% url students_job_placement_page 'students_job_placement' %}">Трудоустройство</a></li>
             </ul>
           </li>
 

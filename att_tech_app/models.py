@@ -19,6 +19,7 @@ __all__ = (
 BASIC_ARTICLE_LOCATION_CHOICES = (
     ('about_tech', u'О техникуме'),
     ('tuition_by_correspondence', u'Заочное отделение'),
+    ('students_tuition_by_correspondence', u'Заочное отделение (обучающимся)'),
     ('courses', u'Подготовительные курсы'),
     ('acceptance_rules', u'Правила приема'),
 )
@@ -39,6 +40,8 @@ ARTICLE_WITH_DOCUMENTS_LOCATION_CHOICES = (
     ('acceptance', u'Зачисление'),
     ('docs_samples', u'Образцы документов'),
     ('comission', u'Приемная комиссия'),
+    ('students_full_time_tuition', u'Очное обучение (обучающимся)'),
+    ('students_job_placement', u'Трудоустройство (обучающимся)')
     # ('standards_programs', u'Стандарты, учебные планы, программы'),
     # ('contingent', u'Контингент'),
     # ('contingent_vacancies', u'Вакансии по контингенту'),

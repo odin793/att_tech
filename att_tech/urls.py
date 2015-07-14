@@ -56,9 +56,17 @@ urlpatterns = patterns('',
 
     url(r'^students/(schedule)/$', page_with_docs_view, name="schedule"),
     url(r'^students/(contingent)/$', page_with_docs_view, name="contingent"),
-    url(r'^students/(contingent_vacancies)/$', page_with_docs_view, name="contingent_vacancies"),
+    url(r'^students/(contingent_vacancies)/$', page_with_docs_view,
+        name="contingent_vacancies"),
     url(r'^students/(stud_life)/$', news_page, name="stud_life_page"),
     url(r'^students/(stud_life)/(\d+)/$', exact_new, name="exact_stud_life"),
+    url(r'^students/(students_full_time_tuition)/$', page_with_docs_view,
+        name="students_full_time_tuition_page"),
+    url(r'^students/(students_tuition_by_correspondence)/$', basic_page_view,
+        name="students_tuition_by_correspondence_page"),
+    url(r'^students/(students_job_placement)/$', page_with_docs_view,
+        name="students_job_placement_page"),
+
 
     url(r'^contacts/$', contacts_page, name="contacts"),
 
