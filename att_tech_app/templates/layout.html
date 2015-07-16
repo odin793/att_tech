@@ -177,6 +177,47 @@
         <div class="main_wrap">
           <div class="content">
             <div class="content_wrap">
+              {% if special %}
+                <table class="table" style="width: 350px;">
+                  <tr>
+                    <th><span style="font-size: 18px">Размер шрифта:</th>
+                    <td>
+                      <button id="special_f1" type="button" class="btn btn-default">
+                        <span style="font-size: 12px">А</span>
+                      </button>
+                    </td>
+                    <td>
+                      <button id="special_f2" type="button" class="btn btn-default">
+                        <span style="font-size: 18px">А</span>
+                      </button>
+                    </td>
+                    <td>
+                      <button id="special_f3" type="button" class="btn btn-default">
+                        <span style="font-size: 26px">А</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><span style="font-size: 18px">Цвет сайта:</th>
+                    <td style="text-align: center">
+                      <div style="width: 32px; height: 32px; margin-left: 2px; background-color: white; font-size: 18px; color: black; line-height: 30px">
+                        <span style="cursor: pointer;" id="special_c1">Ц</span>
+                      </div>
+                    </td>
+                    <td style="text-align: center">
+                      <div style="width: 32px; height: 32px; margin-left: 4px; background-color: black; font-size: 18px; color: white; line-height: 30px">
+                        <span style="cursor: pointer;" id="special_c2">Ц</span>
+                      </div>
+                    </td>
+                    <td style="text-align: center">
+                      <div style="width: 32px; height: 32px; margin-left: 5px; background-color: #9dd1ff; font-size: 18px; color: #063462; line-height: 30px">
+                        <span style="cursor: pointer;" id="special_c3">Ц</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+              {% endif %}
               {% block content %} {% endblock %}
             </div>
           </div>
@@ -186,6 +227,7 @@
     </div>
 
     <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
     <script>
       var arr = ['/about_tech', 'matriculants', 'students', 'news', 'contacts'];
@@ -200,9 +242,88 @@
       if (main_page) {
         $('li.menu-0').addClass('active');
       }
-      $.each($('a.special_link'), function(ind, el) {
-        el.pathname = '/special' + el.pathname
-      })
+
+
+      var get_special_pref = function() {
+        if ($.cookie("attr_special") === undefined) {
+          return undefined
+        } else {
+          return JSON.parse($.cookie("attr_special"));
+        }
+      };
+
+      // var set_active_font_switch = function() {
+      //   $.each(["f1", "f2", "f3"], function(ind, el) {
+      //     if (special_pref.font == el) {
+      //       $("#special_" + el).addClass("active");
+      //       $(".layout_wrap").addClass("sp_" + el);
+      //     } else {
+      //       $("#special_" + el).removeClass("active");
+      //       $(".layout_wrap").removeClass("sp_" + el);
+      //     };
+      //   });
+      // };
+
+      var set_special_styles = function() {
+        $.each(["f1", "f2", "f3"], function(ind, el) {
+          if (special_pref.font == el) {
+            $("#special_" + el).addClass("active");
+            $(".layout_wrap").addClass("sp_" + el);
+          } else {
+            $("#special_" + el).removeClass("active");
+            $(".layout_wrap").removeClass("sp_" + el);
+          };
+        });
+        $.each(["c1", "c2", "c3"], function(ind, el) {
+          if (special_pref.color == el) {
+            $(".layout_wrap").addClass("sp_" + el);
+          } else {
+            $(".layout_wrap").removeClass("sp_" + el);
+          };
+        });
+      };
+
+      var set_special_pref = function(font, color) {
+        if ($.cookie("attr_special") === undefined) {
+          $.cookie("attr_special", JSON.stringify(
+            {"font": font, "color": color}
+          ));
+          return
+        }
+        special_pref = get_special_pref();
+        special_pref.font = font;
+        special_pref.color = color;
+        $.cookie("attr_special", JSON.stringify(special_pref));
+      };
+
+      if (window.location.pathname.split('/')[1] == "special") {
+        if (get_special_pref() === undefined) {
+          set_special_pref("f1", "c1");
+        };
+        var special_pref = get_special_pref();
+        set_special_styles();
+
+        $.each(['f1', 'f2', 'f3'], function(ind, el) {
+          $("#special_" + el).click(function(e, target) {
+            var special_pref = get_special_pref();
+            set_special_pref(el, special_pref.color);
+            set_special_styles();
+          });
+        });
+
+        $.each(['c1', 'c2', 'c3'], function(ind, el) {
+          $("#special_" + el).click(function() {
+            var special_pref = get_special_pref();
+            set_special_pref(special_pref.font, el);
+            set_special_styles();
+          });
+        });
+
+        $.each($('a.special_link'), function(ind, el) {
+          el.pathname = '/special' + el.pathname
+        });
+      };
+
     </script>
     {% block added_scripts %} {% endblock %}
   </body>
