@@ -243,7 +243,6 @@
         $('li.menu-0').addClass('active');
       }
 
-
       var get_special_pref = function() {
         if ($.cookie("attr_special") === undefined) {
           return undefined
@@ -252,33 +251,21 @@
         }
       };
 
-      // var set_active_font_switch = function() {
-      //   $.each(["f1", "f2", "f3"], function(ind, el) {
-      //     if (special_pref.font == el) {
-      //       $("#special_" + el).addClass("active");
-      //       $(".layout_wrap").addClass("sp_" + el);
-      //     } else {
-      //       $("#special_" + el).removeClass("active");
-      //       $(".layout_wrap").removeClass("sp_" + el);
-      //     };
-      //   });
-      // };
-
       var set_special_styles = function() {
         $.each(["f1", "f2", "f3"], function(ind, el) {
           if (special_pref.font == el) {
             $("#special_" + el).addClass("active");
-            $(".layout_wrap").addClass("sp_" + el);
+            $(".layout").addClass("sp_" + el);
           } else {
             $("#special_" + el).removeClass("active");
-            $(".layout_wrap").removeClass("sp_" + el);
+            $(".layout").removeClass("sp_" + el);
           };
         });
         $.each(["c1", "c2", "c3"], function(ind, el) {
           if (special_pref.color == el) {
-            $(".layout_wrap").addClass("sp_" + el);
+            $(".layout").addClass("sp_" + el);
           } else {
-            $(".layout_wrap").removeClass("sp_" + el);
+            $(".layout").removeClass("sp_" + el);
           };
         });
       };
@@ -287,13 +274,13 @@
         if ($.cookie("attr_special") === undefined) {
           $.cookie("attr_special", JSON.stringify(
             {"font": font, "color": color}
-          ));
+          ), {path: "/"});
           return
-        }
+        };
         special_pref = get_special_pref();
         special_pref.font = font;
         special_pref.color = color;
-        $.cookie("attr_special", JSON.stringify(special_pref));
+        $.cookie("attr_special", JSON.stringify(special_pref), {path: "/"});
       };
 
       if (window.location.pathname.split('/')[1] == "special") {

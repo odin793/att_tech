@@ -4,11 +4,11 @@
 {% block title %} {{ article.title }} {% endblock %}
 
 {% block extrahead %}
-	
+
 {% endblock %}
 
 
-{% block content %}							
+{% block content %}
 
 	<div class="row-fluid" style="margin: 0 auto;">
 		<div class="span9" style="padding-right: 40px;">
@@ -17,7 +17,7 @@
 			<div class="row">
 				<div class="clearfix">&nbsp;</div>
 			</div>
-			
+
 			<div>
 				{{ article.text|safe }}
 			</div>
@@ -27,23 +27,27 @@
 			</div>
 
 			<div>
-				<table class="table table-striped">
+				{% if special %}
+					<table class="table">
+				{% else %}
+					<table class="table table-striped">
+				{% endif %}
 					{% for file in article.files_list.all %}
 	      		<tr>
 							<td><h4>{{ forloop.counter }}</h4></td>
-							<td><a href="{{ file.url }}"><h4>{{ file.name }}</h4></a></td>		
+							<td><a href="{{ file.url }}"><h4>{{ file.name }}</h4></a></td>
 	  				</tr>
 					{% endfor %}
 				</table>
 			</div>
 		</div>
-		
+
 		{% news_block %}
-		
+
 	</div>
-{% endblock %}							
+{% endblock %}
 
 
 {% block added_scripts %}
-	
+
 {% endblock %}

@@ -10,17 +10,17 @@
 {% endblock %}
 
 {% block extrahead %}
-	
+
 {% endblock %}
 
 
-{% block content %}							
+{% block content %}
 
 	<div class="row-fluid" style="margin: 0 auto;">
 		<div class="span9" style="padding-right: 40px;">
 
 			{% if is_event %}
-					<h2 style="margin: 0 0 20px 0;">Студенческая жизнь</h2>
+					<h2 style="margin: 0 0 20px 0;">Студенческое самоуправление</h2>
 			{% else %}
 					<h2 style="margin: 0 0 20px 0;">Новости</h2>
 			{% endif %}
@@ -44,10 +44,10 @@
 								<h4 style="margin: 8px 0">Нет новостей</h4>
     					</div>
 					{% endfor %}
-						
+
 					<div class="row-fluid">
 						<div style="text-align: center">
-							<div class="btn-toolbar">						
+							<div class="btn-toolbar">
 								{% for link in links_list %}
 									<div class="btn-group">
 										{% if link != 0 and link != cur_page %}
@@ -78,17 +78,14 @@
 						</ul>
 					</div>
 					{% endcomment %}
-				
+
 				</div>
-			
+
 			</div>
 		</div>
 		{% news_block %}
-				
+
 	</div>
-{% endblock %}							
-
-
-{% block added_scripts %}
-
 {% endblock %}
+
+

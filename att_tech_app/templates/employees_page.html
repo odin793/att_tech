@@ -43,7 +43,11 @@
 					{% else %}
 						<div class="tab-pane" id="employee-{{ forloop.counter }}">
 					{% endif %}
-						<table class="table table-striped employees_table">
+						{% if special %}
+							<table class="table employees_table">
+						{% else %}
+							<table class="table table-striped employees_table">
+						{% endif %}
 							{% for employee in employee_list %}
 			      		<tr>
 									{% comment %}<td><h4>{{ forloop.counter }}</h4></td>{% endcomment %}
