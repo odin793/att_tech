@@ -38,18 +38,32 @@
 }
 
 
-.layout.sp_c1, .layout.sp_c1 .well {
+.layout.sp_c1, .layout.sp_c1 .well, .layout.sp_c1 ul.nav li a {
     background: white;
     color: black;
 }
-.layout.sp_c2, .layout.sp_c2 .well {
+.layout.sp_c2, .layout.sp_c2 .well, .layout.sp_c2 ul.nav li a  {
     background: black;
     color: white;
 }
-.layout.sp_c3, .layout.sp_c3 .well {
+.layout.sp_c3, .layout.sp_c3 .well, .layout.sp_c3 ul.nav li a {
     background: #9dd1ff;
     color: #063462;
 }
+
+.layout.sp_c1 ul.nav li.active a {
+    color: white;
+    background-color: black;
+}
+.layout.sp_c2 ul.nav li.active a {
+    color: black;
+    background-color: white;
+}
+.layout.sp_c3 ul.nav li.active a {
+    color: #063462;
+    background-color: white;
+}
+
 
 .layout.sp_c1 .well h4, .layout.sp_c1 table h4 {
     color: black;
