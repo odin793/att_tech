@@ -162,15 +162,17 @@
         <a href="http://www.kremlinrus.ru" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 146px;">kremlinrus.ru</a>
 
         <a href="http://минобрнауки.рф" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 0;">минобрнауки.рф</a>
+        {% comment %}
         {% if special %}
-          <a href="/" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 265px;">
+          <a href="/" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 262px;">
             Обычная версия сайта
           </a>
         {% else %}
-          <a href="/special" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 265px;">
-            специальная версия сайта
+          <a href="/special" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 262px;">
+            Специальная версия сайта
           </a>
         {% endif %}
+        {% endcomment %}
       </div>
 
       <div class="layout">
