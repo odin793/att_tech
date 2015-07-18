@@ -28,21 +28,21 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="{% url about_tech 'about_tech' %}">
+                <a class="special_link" href="{% url about_tech 'about_tech' %}">
                   Основные сведения
                 </a>
               </li>
               <li>
-                <a href="{% url structure 'structure' %}">
+                <a class="special_link" href="{% url structure 'structure' %}">
                   Структура и органы управления<br> образовательной организацией
                 </a>
               </li>
               <li>
-                <a href="{% url constituent_docs 'constituent_docs'%}">Документы</a>
+                <a class="special_link" href="{% url constituent_docs 'constituent_docs'%}">Документы</a>
               </li>
-              <li><a href="{% url normative_docs 'normative_docs'%}">Образование</a></li>
+              <li><a class="special_link" href="{% url normative_docs 'normative_docs'%}">Образование</a></li>
               <li>
-                <a href="{% url educational_standards 'educational_standards'%}">
+                <a class="special_link" href="{% url educational_standards 'educational_standards'%}">
                   Образовательные стандарты
                 </a>
               </li>
@@ -51,40 +51,40 @@
                   Руководство. Педагогический<br>(научно-педагогический) состав
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a href="{% url masters_page %}">Руководство</a></li>
+                  <li><a class="special_link" href="{% url masters_page %}">Руководство</a></li>
                   <li>
-                    <a href="{% url employees_page %}">
+                    <a class="special_link" href="{% url employees_page %}">
                       Педагогический (научно-педагогический) состав
                     </a>
                   </li>
                 </ul>
+              </li>
               <li>
-              <li>
-                <a href="{% url material_logistics 'material_logistics' %}">
+                <a class="special_link" href="{% url material_logistics 'material_logistics' %}">
                   Материально-техническое<br>обеспечение и оснащенность<br>образовательного процесса
                 </a>
               </li>
               <li>
-                <a href="{% url scholarships 'scholarships' %}">
+                <a class="special_link" href="{% url scholarships 'scholarships' %}">
                   Стипендии и иные виды<br>материальной поддержки
                 </a>
               </li>
               <li>
-                <a href="{% url paid_services 'paid_services' %}">
+                <a class="special_link" href="{% url paid_services 'paid_services' %}">
                   Платные образовательные услуги
                 </a>
               </li>
               <li>
-                <a href="{% url finance 'finance' %}">
+                <a class="special_link" href="{% url finance 'finance' %}">
                   Финансово-хозяйственная<br>деятельность
                 </a>
               </li>
               <li>
-                <a href="{% url employees_vacancies 'employees_vacancies' %}">
+                <a class="special_link" href="{% url employees_vacancies 'employees_vacancies' %}">
                   Вакантные места для приёма (перевода)
                 </a>
               </li>
-              <li><a href="{% url grants 'grants' %}">Награды, сертификаты, поощрения</a></li>
+              <li><a class="special_link" href="{% url grants 'grants' %}">Награды, сертификаты, поощрения</a></li>
             </ul>
           </li>
 
@@ -96,17 +96,17 @@
               </span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="{% url profs_and_specs %}">Специальности и профессии</a></li>
+              <li><a class="special_link" href="{% url profs_and_specs %}">Специальности и профессии</a></li>
               <li>
-                <a href="{% url tuition_by_correspondence 'tuition_by_correspondence' %}">
+                <a class="special_link" href="{% url tuition_by_correspondence 'tuition_by_correspondence' %}">
                   Заочное обучение
                 </a>
               </li>
-              <li><a href="{% url courses 'courses' %}">Подготовительные курсы</a></li>
-              <li><a href="{% url acceptance_rules 'acceptance_rules' %}">Правила приема</a></li>
-              <li><a href="{% url comission 'comission' %}">Приемная комиссия</a></li>
-              <li><a href="{% url docs_samples 'docs_samples' %}">Образцы документов</a></li>
-              <li><a href="{% url acceptance 'acceptance' %}">Зачисление</a></li>
+              <li><a class="special_link" href="{% url courses 'courses' %}">Подготовительные курсы</a></li>
+              <li><a class="special_link" href="{% url acceptance_rules 'acceptance_rules' %}">Правила приема</a></li>
+              <li><a class="special_link" href="{% url comission 'comission' %}">Приемная комиссия</a></li>
+              <li><a class="special_link" href="{% url docs_samples 'docs_samples' %}">Образцы документов</a></li>
+              <li><a class="special_link" href="{% url acceptance 'acceptance' %}">Зачисление</a></li>
             </ul>
           </li>
 
@@ -120,28 +120,28 @@
             </a>
             <ul class="dropdown-menu">
               <!-- <li><a href="{% url schedule 'schedule' %}">Расписание</a></li> -->
-              <li><a href="{% url stud_life_page 'stud_life' %}">Студенческое самоуправление</a></li>
+              <li><a class="special_link" href="{% url stud_life_page 'stud_life' %}">Студенческое самоуправление</a></li>
               <li>
-                <a href="{% url students_full_time_tuition_page 'students_full_time_tuition' %}">
+                <a class="special_link" href="{% url students_full_time_tuition_page 'students_full_time_tuition' %}">
                   Очное обучение
                 </a>
               </li>
               <li>
-                <a href="{% url students_tuition_by_correspondence_page 'students_tuition_by_correspondence' %}">
+                <a class="special_link" href="{% url students_tuition_by_correspondence_page 'students_tuition_by_correspondence' %}">
                   Заочное обучение
                 </a>
               </li>
-              <li><a href="{% url students_job_placement_page 'students_job_placement' %}">Трудоустройство</a></li>
+              <li><a class="special_link" href="{% url students_job_placement_page 'students_job_placement' %}">Трудоустройство</a></li>
             </ul>
           </li>
 
           <li class="menu-3">
-            <a class="two_line" href="{% url news_page 'news' %}">
+            <a class="two_line special_link" href="{% url news_page 'news' %}">
               <span>Новости</span>
             </a>
-          <li class="menu-4"><a class="two_line" href="{% url contacts %}">Контакты</a></li>
+          <li class="menu-4"><a class="two_line special_link" href="{% url contacts %}">Контакты</a></li>
         </ul>
-        <a href="/">
+        <a class="special_link" href="/">
           <img src="{{STATIC_URL}}img/ls1.png" class="slogan_img" />
           {% comment %}
             <div style="position: absolute; left: 185px; top: 50px;">
@@ -162,12 +162,64 @@
         <a href="http://www.kremlinrus.ru" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 146px;">kremlinrus.ru</a>
 
         <a href="http://минобрнауки.рф" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 0;">минобрнауки.рф</a>
+        {% comment %}
+        {% if special %}
+          <a href="/" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 262px;">
+            Обычная версия сайта
+          </a>
+        {% else %}
+          <a href="/special" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 262px;">
+            Специальная версия сайта
+          </a>
+        {% endif %}
+        {% endcomment %}
       </div>
 
       <div class="layout">
         <div class="main_wrap">
           <div class="content">
             <div class="content_wrap">
+              {% if special %}
+                <table class="table" style="width: 350px;">
+                  <tr>
+                    <th><span style="font-size: 18px">Размер шрифта:</th>
+                    <td>
+                      <button id="special_f1" type="button" class="btn btn-default">
+                        <span style="font-size: 12px">А</span>
+                      </button>
+                    </td>
+                    <td>
+                      <button id="special_f2" type="button" class="btn btn-default">
+                        <span style="font-size: 18px">А</span>
+                      </button>
+                    </td>
+                    <td>
+                      <button id="special_f3" type="button" class="btn btn-default">
+                        <span style="font-size: 26px">А</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><span style="font-size: 18px">Цвет сайта:</th>
+                    <td style="text-align: center">
+                      <div style="width: 32px; height: 32px; margin-left: 2px; background-color: white; font-size: 18px; color: black; line-height: 30px">
+                        <span style="cursor: pointer;" id="special_c1">Ц</span>
+                      </div>
+                    </td>
+                    <td style="text-align: center">
+                      <div style="width: 32px; height: 32px; margin-left: 4px; background-color: black; font-size: 18px; color: white; line-height: 30px">
+                        <span style="cursor: pointer;" id="special_c2">Ц</span>
+                      </div>
+                    </td>
+                    <td style="text-align: center">
+                      <div style="width: 32px; height: 32px; margin-left: 5px; background-color: #9dd1ff; font-size: 18px; color: #063462; line-height: 30px">
+                        <span style="cursor: pointer;" id="special_c3">Ц</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+              {% endif %}
               {% block content %} {% endblock %}
             </div>
           </div>
@@ -177,6 +229,7 @@
     </div>
 
     <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
     <script>
       var arr = ['/about_tech', 'matriculants', 'students', 'news', 'contacts'];
@@ -191,6 +244,75 @@
       if (main_page) {
         $('li.menu-0').addClass('active');
       }
+
+      var get_special_pref = function() {
+        if ($.cookie("attr_special") === undefined) {
+          return undefined
+        } else {
+          return JSON.parse($.cookie("attr_special"));
+        }
+      };
+
+      var set_special_styles = function() {
+        $.each(["f1", "f2", "f3"], function(ind, el) {
+          if (special_pref.font == el) {
+            $("#special_" + el).addClass("active");
+            $(".layout").addClass("sp_" + el);
+          } else {
+            $("#special_" + el).removeClass("active");
+            $(".layout").removeClass("sp_" + el);
+          };
+        });
+        $.each(["c1", "c2", "c3"], function(ind, el) {
+          if (special_pref.color == el) {
+            $(".layout").addClass("sp_" + el);
+          } else {
+            $(".layout").removeClass("sp_" + el);
+          };
+        });
+      };
+
+      var set_special_pref = function(font, color) {
+        if ($.cookie("attr_special") === undefined) {
+          $.cookie("attr_special", JSON.stringify(
+            {"font": font, "color": color}
+          ), {path: "/"});
+          return
+        };
+        special_pref = get_special_pref();
+        special_pref.font = font;
+        special_pref.color = color;
+        $.cookie("attr_special", JSON.stringify(special_pref), {path: "/"});
+      };
+
+      if (window.location.pathname.split('/')[1] == "special") {
+        if (get_special_pref() === undefined) {
+          set_special_pref("f1", "c1");
+        };
+        var special_pref = get_special_pref();
+        set_special_styles();
+
+        $.each(['f1', 'f2', 'f3'], function(ind, el) {
+          $("#special_" + el).click(function(e, target) {
+            var special_pref = get_special_pref();
+            set_special_pref(el, special_pref.color);
+            set_special_styles();
+          });
+        });
+
+        $.each(['c1', 'c2', 'c3'], function(ind, el) {
+          $("#special_" + el).click(function() {
+            var special_pref = get_special_pref();
+            set_special_pref(special_pref.font, el);
+            set_special_styles();
+          });
+        });
+
+        $.each($('a.special_link'), function(ind, el) {
+          el.pathname = '/special' + el.pathname
+        });
+      };
+
     </script>
     {% block added_scripts %} {% endblock %}
   </body>
