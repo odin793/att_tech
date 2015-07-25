@@ -14,6 +14,13 @@
     border-bottom-left-radius: 10px;
 }
 
+.layout.sp_images_off img, .layout.sp_images_off #indexCarousel, .layout.sp_images_off #gallery {
+    display: none;
+}
+
+.header.sp_images_off #header_logo {
+    display: none;
+}
 
 .layout.sp_f1 p, .layout.sp_f1 a, .layout.sp_f1 h4, .layout.sp_f1 h5, .layout.sp_f1 span {
     font-size: 12px;
@@ -42,7 +49,7 @@
     background: white;
     color: black;
 }
-.layout.sp_c2, .layout.sp_c2 .well, .layout.sp_c2 ul.nav li a  {
+.layout.sp_c2, .layout.sp_c2 .well, .layout.sp_c2 ul.nav li a, .header.sp_c1, .header.sp_c2, .header.sp_c3 {
     background: black;
     color: white;
 }

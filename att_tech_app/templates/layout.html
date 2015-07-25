@@ -157,7 +157,7 @@
           </span>
           <br>
         {% endcomment %}
-          <img src="{{STATIC_URL}}img/logo.png" style="position: absolute; left: 20px; top: 25px"/>
+          <img id="header_logo" src="{{STATIC_URL}}img/logo.png" style="position: absolute; left: 20px; top: 25px"/>
         </a>
         <a href="http://www.kremlinrus.ru" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 146px;">kremlinrus.ru</a>
 
@@ -217,6 +217,19 @@
                       </div>
                     </td>
                   </tr>
+                  <tr>
+                    <th><span style="font-size: 18px">Изображения:</th>
+                    <td style="text-align: center">
+                        <input type="radio" name="special_images" id="special_images_on" value="on">
+                        <br>Вкл
+                    </td>
+                    <td></td>
+                    <td style="text-align: center">
+                      <input type="radio" name="special_images" id="special_images_off" value="off">
+                      <br>Выкл
+                    </td>
+                </form>
+
                 </table>
 
               {% endif %}
@@ -258,36 +271,50 @@
           if (special_pref.font == el) {
             $("#special_" + el).addClass("active");
             $(".layout").addClass("sp_" + el);
+            $(".header").addClass("sp_" + el);
           } else {
             $("#special_" + el).removeClass("active");
             $(".layout").removeClass("sp_" + el);
+            $(".header").removeClass("sp_" + el);
           };
         });
         $.each(["c1", "c2", "c3"], function(ind, el) {
           if (special_pref.color == el) {
             $(".layout").addClass("sp_" + el);
+            $(".header").addClass("sp_" + el);
           } else {
             $(".layout").removeClass("sp_" + el);
+            $(".header").removeClass("sp_" + el);
           };
         });
+        if (special_pref.images) {
+          $('#special_images_on')[0].checked = true;
+          $(".layout").removeClass("sp_images_off");
+          $(".header").removeClass("sp_images_off");
+        } else {
+          $('#special_images_off')[0].checked = true;
+          $(".layout").addClass("sp_images_off");
+          $(".header").addClass("sp_images_off");
+        };
       };
 
-      var set_special_pref = function(font, color) {
+      var set_special_pref = function(font, color, images) {
         if ($.cookie("attr_special") === undefined) {
           $.cookie("attr_special", JSON.stringify(
-            {"font": font, "color": color}
+            {"font": font, "color": color, "images": true}
           ), {path: "/"});
           return
         };
         special_pref = get_special_pref();
         special_pref.font = font;
         special_pref.color = color;
+        special_pref.images = images;
         $.cookie("attr_special", JSON.stringify(special_pref), {path: "/"});
       };
 
       if (window.location.pathname.split('/')[1] == "special") {
         if (get_special_pref() === undefined) {
-          set_special_pref("f1", "c1");
+          set_special_pref("f1", "c1", true);
         };
         var special_pref = get_special_pref();
         set_special_styles();
@@ -295,7 +322,7 @@
         $.each(['f1', 'f2', 'f3'], function(ind, el) {
           $("#special_" + el).click(function(e, target) {
             var special_pref = get_special_pref();
-            set_special_pref(el, special_pref.color);
+            set_special_pref(el, special_pref.color, special_pref.images);
             set_special_styles();
           });
         });
@@ -303,7 +330,20 @@
         $.each(['c1', 'c2', 'c3'], function(ind, el) {
           $("#special_" + el).click(function() {
             var special_pref = get_special_pref();
-            set_special_pref(special_pref.font, el);
+            set_special_pref(special_pref.font, el, special_pref.images);
+            set_special_styles();
+          });
+        });
+
+        $.each(['on', 'off'], function(ind, el) {
+          $('#special_images_' + el).click(function() {
+            var special_pref = get_special_pref();
+            if (el == 'off') {
+              images = false;
+            } else {
+              images = true;
+            };
+            set_special_pref(special_pref.font, special_pref.color, images);
             set_special_styles();
           });
         });
