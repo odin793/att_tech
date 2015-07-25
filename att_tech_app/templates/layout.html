@@ -157,7 +157,7 @@
           </span>
           <br>
         {% endcomment %}
-          <img src="{{STATIC_URL}}img/logo.png" style="position: absolute; left: 20px; top: 25px"/>
+          <img id="header_logo" src="{{STATIC_URL}}img/logo.png" style="position: absolute; left: 20px; top: 25px"/>
         </a>
         <a href="http://www.kremlinrus.ru" class="btn btn-default btn-lg" role="button" style="position: absolute; bottom: 0; right: 146px;">kremlinrus.ru</a>
 
@@ -290,9 +290,11 @@
         if (special_pref.images) {
           $('#special_images_on')[0].checked = true;
           $(".layout").removeClass("sp_images_off");
+          $(".header").removeClass("sp_images_off");
         } else {
           $('#special_images_off')[0].checked = true;
           $(".layout").addClass("sp_images_off");
+          $(".header").addClass("sp_images_off");
         };
       };
 
@@ -338,10 +340,8 @@
             var special_pref = get_special_pref();
             if (el == 'off') {
               images = false;
-              // $(".layout").addClass("sp_images_off");
             } else {
               images = true;
-              // $(".layout").removeClass("sp_images_off");
             };
             set_special_pref(special_pref.font, special_pref.color, images);
             set_special_styles();
