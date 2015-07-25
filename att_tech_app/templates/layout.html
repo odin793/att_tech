@@ -271,16 +271,20 @@
           if (special_pref.font == el) {
             $("#special_" + el).addClass("active");
             $(".layout").addClass("sp_" + el);
+            $(".header").addClass("sp_" + el);
           } else {
             $("#special_" + el).removeClass("active");
             $(".layout").removeClass("sp_" + el);
+            $(".header").removeClass("sp_" + el);
           };
         });
         $.each(["c1", "c2", "c3"], function(ind, el) {
           if (special_pref.color == el) {
             $(".layout").addClass("sp_" + el);
+            $(".header").addClass("sp_" + el);
           } else {
             $(".layout").removeClass("sp_" + el);
+            $(".header").removeClass("sp_" + el);
           };
         });
         if (special_pref.images) {

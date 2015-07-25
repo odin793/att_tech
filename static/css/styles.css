@@ -45,7 +45,7 @@
     background: white;
     color: black;
 }
-.layout.sp_c2, .layout.sp_c2 .well, .layout.sp_c2 ul.nav li a  {
+.layout.sp_c2, .layout.sp_c2 .well, .layout.sp_c2 ul.nav li a, .header.sp_c1, .header.sp_c2, .header.sp_c3 {
     background: black;
     color: white;
 }
